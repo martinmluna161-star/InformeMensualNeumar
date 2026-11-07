@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cierre de mes Neumar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: informe de cierre en una columna, navegación fija arriba, secciones con fondo alternado.
+   Branding Lógica: turquesa #0094BA, carbón #2A2A2E, gris #E2E2E1, Poppins, círculos y diagonal de portada. */
+:root{
+  --bg:#F5F8F9; --surface:#FFFFFF; --ink:#2A2A2E; --muted:#62666C; --line:#E2E2E1;
+  --teal:#0094BA; --teal-text:#00718F; --teal-soft:#DCEFF5; --gray:#C4C4C4;
+  --ok:#1F7A52; --ok-soft:#DDF1E6; --warn:#8A5A00; --warn-soft:#FBEFD2;
+  --info:#00718F; --info-soft:#DCEFF5;
+  --font:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#111416; --surface:#1A1E21; --ink:#ECEFF1; --muted:#9AA3AA; --line:#2B3236;
+  --teal:#2BB8DC; --teal-text:#5FD0EC; --teal-soft:#10323D; --gray:#4A5258;
+  --ok:#5FD39B; --ok-soft:#14332A; --warn:#F0C060; --warn-soft:#3A2D10;
+  --info:#5FD0EC; --info-soft:#10323D; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#111416; --surface:#1A1E21; --ink:#ECEFF1; --muted:#9AA3AA; --line:#2B3236;
+  --teal:#2BB8DC; --teal-text:#5FD0EC; --teal-soft:#10323D; --gray:#4A5258;
+  --ok:#5FD39B; --ok-soft:#14332A; --warn:#F0C060; --warn-soft:#3A2D10;
+  --info:#5FD0EC; --info-soft:#10323D; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.2;margin:0}
+p{margin:0}
+a{color:var(--teal-text)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:56px}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap}
+.brand b{color:var(--teal)}
+.brand small{font-weight:500;color:var(--muted);font-size:12px;margin-left:8px;letter-spacing:.02em}
+nav{display:flex;gap:4px;overflow-x:auto;min-width:0;flex:1;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px}
+nav a:hover{color:var(--ink)}
+nav a.on{background:var(--teal-soft);color:var(--teal-text);font-weight:600}
+@media (max-width:640px){.brand small{display:none}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:56px 0 44px}
+.hero .deco{position:absolute;right:-90px;top:-40px;width:460px;max-width:70vw;pointer-events:none;opacity:.95}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-text)}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:700;letter-spacing:-.02em;margin:12px 0 14px;max-width:14ch}
+.hero .lead{max-width:56ch;color:var(--muted);font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:13px;color:var(--muted)}
+.meta span b{color:var(--ink);font-weight:600}
+.kpis{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:36px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px}
+.kpi .v{font-size:32px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.kpi .l{font-size:13px;color:var(--muted);margin-top:6px}
+.kpi .d{font-size:12px;font-weight:600;margin-top:8px;display:inline-block;padding:2px 9px;border-radius:999px}
+.d.up{background:var(--ok-soft);color:var(--ok)} .d.flat{background:var(--info-soft);color:var(--info)}
+
+/* Sections */
+section.s{padding:56px 0;border-top:1px solid var(--line)}
+section.alt{background:var(--surface);margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sh{display:grid;gap:8px;margin-bottom:28px;max-width:68ch}
+.sh h2{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-.015em}
+.sh p{color:var(--muted)}
+h3{font-size:18px;font-weight:600}
+.sub{margin:30px 0 12px}
+
+/* Messages */
+.msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.msg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.msg h3{margin-bottom:8px}
+.msg p{color:var(--muted);font-size:14px}
+.msg .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.tag.g{color:var(--ok)} .tag.t{color:var(--teal-text)}
+
+/* Chips / filters */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--teal);color:var(--ink)}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"],:root:not([data-theme="light"]) .chip[aria-selected="true"]{color:#06222B}}
+:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .chip[aria-selected="true"]{color:#06222B}
+.st{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.st.hecho{background:var(--ok-soft);color:var(--ok)} .st.curso{background:var(--warn-soft);color:var(--warn)}
+.st.prox{background:var(--info-soft);color:var(--info)}
+
+/* Work list */
+.work{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:start}
+section.alt .item{background:var(--bg)}
+.item h4{font-size:15px;font-weight:600}
+.item p{grid-column:1;color:var(--muted);font-size:13.5px}
+.item .st{grid-row:1;grid-column:2}
+.group{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 4px}
+.item[hidden],.group[hidden]{display:none}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:22px;padding-bottom:4px}
+.tabs .chip{white-space:nowrap}
+.panel[hidden]{display:none}
+
+/* Tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
+th{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+td.n{font-weight:500}
+.bar{display:flex;align-items:center;gap:10px;min-width:150px}
+.bar i{display:block;height:8px;border-radius:4px;background:var(--teal);min-width:2px}
+.bar i.g{background:var(--gray)}
+.bar span{font-size:13px;white-space:nowrap}
+tr.tot td{font-weight:600;background:var(--bg)}
+.note{margin-top:14px;font-size:13px;color:var(--muted);max-width:75ch}
+
+/* Charts */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+section.alt .card{background:var(--bg)}
+.card h3{margin-bottom:4px} .card .cap{font-size:13px;color:var(--muted);margin-bottom:16px}
+.hb{display:grid;gap:12px}
+.hb .row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;font-size:13px}
+.hb .track{background:var(--line);border-radius:6px;height:26px;position:relative;overflow:hidden}
+.hb .fill{height:100%;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:12px;font-weight:600;min-width:42px}
+.hb .fill.g{background:var(--gray);color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hb .fill{color:#06222B}}
+:root[data-theme="dark"] .hb .fill{color:#06222B}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.mini div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+section.alt .mini div{background:var(--bg)}
+.mini b{display:block;font-size:24px;font-weight:700;letter-spacing:-.01em}
+.mini span{font-size:12.5px;color:var(--muted)}
+
+/* Callout */
+.callout{border-radius:12px;padding:16px 18px;margin-top:18px;font-size:14px;max-width:78ch;background:var(--teal-soft);color:var(--ink)}
+.callout b{font-weight:600}
+
+/* Goals */
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.goal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;align-content:start}
+section.alt .goal{background:var(--bg)}
+.goal h3{font-size:18px}
+.goal .why{font-size:13.5px;color:var(--muted)}
+.met{display:grid;gap:8px}
+.met div{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:baseline;font-size:13px;border-top:1px solid var(--line);padding-top:8px}
+.met .k{color:var(--ink)} .met .a{color:var(--muted)} .met .arr{color:var(--teal)} .met .t{font-weight:700;color:var(--teal-text)}
+.pr{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-text)}
+
+/* Agreements */
+.agree{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.agree .card ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:14px;color:var(--muted)}
+.agree .card li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.agree .card li b{color:var(--ink);font-weight:600}
+.agree .ck{color:var(--ok);font-weight:700}
+.agree .ar{color:var(--teal);font-weight:700}
+
+ul.plain{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+ul.plain b{color:var(--ink);font-weight:600}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+footer b{color:var(--ink)}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--teal-text);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;z-index:25}
+.totop.show{opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.totop{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>Lógica</b><small>Neumar · Cierre de octubre</small></div>
+    <nav id="nav" aria-label="Secciones">
+      <a href="#resumen">Resumen</a>
+      <a href="#marketing">Marketing</a>
+      <a href="#estado">Sistemas</a>
+      <a href="#numeros">Números</a>
+      <a href="#estrategia">Estrategia</a>
+      <a href="#noviembre">Noviembre</a>
+      <a href="#metodo">Método</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="deco" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="250" cy="170" r="150" fill="none" stroke="#C4C4C4" stroke-width="40" opacity=".55"/>
+    <circle cx="190" cy="190" r="165" fill="none" stroke="#0094BA" stroke-width="40" opacity=".22"/>
+    <polygon points="430,20 430,70 150,350 100,350" fill="#0094BA" opacity=".18"/>
+  </svg>
+  <div style="position:relative">
+    <div class="eyebrow">Informe de cierre de mes</div>
+    <h1>Neumar, octubre 2026</h1>
+    <p class="lead">Lo que se logró en el mes en marketing y en sistemas, cómo están los números de anuncios, mensajes y Odoo, la estrategia comercial validada y los objetivos para noviembre.</p>
+    <div class="meta">
+      <span>Preparado por <b>Lógica</b></span>
+      <span>Marketing <b>Federico Sánchez Gil</b></span>
+      <span>Sistemas <b>Martín Luna</b></span>
+      <span>Fecha de corte <b>5 de noviembre de 2026</b></span>
+      <span>Datos de chat <b>7 al 31 de octubre</b></span>
+    </div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><div class="v num">827</div><div class="l">conversaciones iniciadas desde anuncios (Meta)</div><span class="d flat">USD 1,43 por conversación</span></div>
+    <div class="kpi"><div class="v num">449</div><div class="l">conversaciones de clientes registradas en ChatRoom</div><span class="d flat">65,5% vino de anuncios</span></div>
+    <div class="kpi"><div class="v num">7 min</div><div class="l">mediana hasta la primera respuesta</div><span class="d up">67,5% responde en 15 min o menos</span></div>
+    <div class="kpi"><div class="v num">244</div><div class="l">oportunidades en el CRM (eran 25 el 12/10)</div><span class="d up">185 creadas en octubre</span></div>
+  </div>
+</div>
+
+<!-- RESUMEN -->
+<section class="s" id="resumen">
+  <div class="sh">
+    <h2>Resumen del mes</h2>
+    <p>Octubre fue el primer mes formal de la consultoría. Marketing pasó a tener un canal único y un tablero de prioridades, salió la primera gira de reventas de Ultra Force y se lanzó la NEUMAR WEEK. En sistemas, ChatRoom y el CRM se consolidaron como canal diario de venta, con la base de Odoo mejorando semana a semana. En noviembre el foco está en los mostradores, la llegada de Ultra Force y el circuito de postventa.</p>
+  </div>
+  <div class="msgs">
+    <div class="msg"><span class="tag g">Marketing</span><h3>Un solo canal y un tablero para todo el equipo</h3><p>Todo pedido de marketing entra por Lógica y queda en el semáforo de demanda, con responsable, fecha y estado. Las 14 tareas urgentes, previas a la primera gira, se cumplieron a tiempo.</p></div>
+    <div class="msg"><span class="tag g">Ultra Force</span><h3>Marca, material y primera gira de reventas</h3><p>Kit de marca, landing lista, estados de WhatsApp, guion de visita, material impreso y carpetas. La primera gira recorrió Villa Mercedes, Río Cuarto, Valle de Conlara y Mendoza.</p></div>
+    <div class="msg"><span class="tag g">NEUMAR WEEK</span><h3>Nuestro propio Cyber, con muy buena respuesta</h3><p>Comprá 3 neumáticos y llevate el 4°, del 2 al 4/11. Con teasers, comerciales y pauta en todos los canales, la promo funcionó en los mostradores y se extendió hasta el lunes 9/11.</p></div>
+    <div class="msg"><span class="tag g">Anuncios</span><h3>Conversaciones constantes y a bajo costo</h3><p>Meta informa 827 conversaciones iniciadas a USD 1,43 cada una, con un alcance de 191.761 personas y 679 de ellas en San Luis.</p></div>
+    <div class="msg"><span class="tag g">CRM y Odoo</span><h3>Un CRM que pasó de 25 a 244 oportunidades</h3><p>Los mensajes de ChatRoom entran a Odoo. Se sumaron reglas automáticas de validación de contacto y de origen en cotizaciones, y la cobertura de teléfonos subió de 23% a 28,9%.</p></div>
+    <div class="msg"><span class="tag t">Atención</span><h3>Respuesta en minutos y mensaje fuera de horario</h3><p>La primera respuesta llega en 7 minutos hábiles de mediana, y dos de cada tres consultas se responden en 15 minutos o menos. Fuera de horario responde un mensaje automático.</p></div>
+    <div class="msg"><span class="tag t">Noviembre</span><h3>Postventa unificada y lista para arrancar</h3><p>Ya está asignado el responsable de postventa en SUC 1 y se definió una gestión única para Neumar y FEVE. Sigue la configuración del circuito en Odoo.</p></div>
+  </div>
+</section>
+
+<!-- MARKETING -->
+<section class="s alt" id="marketing">
+  <div class="sh">
+    <h2>Marketing: lo realizado</h2>
+    <p>Dirección de marketing a cargo de Lógica. Organización del equipo, lanzamiento comercial de Ultra Force, NEUMAR WEEK y lo que pasa a noviembre.</p>
+  </div>
+  <div class="mini">
+    <div><b class="num">28</b><span>tareas en el semáforo de demanda</span></div>
+    <div><b class="num">14 de 14</b><span>urgentes cumplidas antes de la gira</span></div>
+    <div><b class="num">4</b><span>plazas en la primera gira de reventas</span></div>
+    <div><b class="num">+5 días</b><span>de extensión de la NEUMAR WEEK, hasta el 9/11</span></div>
+  </div>
+  <div class="chips" role="group" aria-label="Filtrar marketing por estado" data-list="work-mkt">
+    <button class="chip" data-f="all" aria-pressed="true">Todo</button>
+    <button class="chip" data-f="hecho" aria-pressed="false">Realizado</button>
+    <button class="chip" data-f="curso" aria-pressed="false">En marcha</button>
+    <button class="chip" data-f="prox" aria-pressed="false">Pasa a noviembre</button>
+  </div>
+  <div class="work" id="work-mkt">
+    <div class="group">Organización del equipo</div>
+    <div class="item" data-s="hecho"><h4>Canal único de marketing</h4><span class="st hecho">Realizado</span><p>Desde octubre, todo pedido de marketing, incluida la comunicación con desarrollo web, pasa por Lógica, que lo baja al equipo con prioridad y fecha. Validado por Juan Ignacio en el grupo MARKETEAM.</p></div>
+    <div class="item" data-s="hecho"><h4>Semáforo de demanda</h4><span class="st hecho">Realizado</span><p>Tablero compartido con 28 tareas en tres niveles de urgencia, responsable y fecha. Reglas de juego: ninguna pieza sin boceto aprobado, aprobación en 48 h hábiles y toda difusión hacia la línea comercial central.</p></div>
+    <div class="item" data-s="hecho"><h4>Roles definidos</h4><span class="st hecho">Realizado</span><p>Diseño y redes (Martina), pauta (Marcos), venta B2C (Mariano), venta B2B (Kili), desarrollo web (Pereyra) y aprobación final de Juan Ignacio.</p></div>
+
+    <div class="group">Ultra Force: lanzamiento comercial</div>
+    <div class="item" data-s="hecho"><h4>Paquete comercial para reventas</h4><span class="st hecho">Realizado</span><p>Precios, plazos, promo y vencimiento definidos por el equipo comercial y validados por Juan Ignacio.</p></div>
+    <div class="item" data-s="hecho"><h4>Kit de estados de WhatsApp</h4><span class="st hecho">Realizado</span><p>Dos versiones de placas: comercial para los vendedores e institucional para Juan Ignacio, en formato teaser y sin mencionar la marca. Todas las consultas van a la línea central.</p></div>
+    <div class="item" data-s="hecho"><h4>Guion de visita y material impreso</h4><span class="st hecho">Realizado</span><p>Argumentos de venta para las reventas, lista de precios y ficha de producto impresas, y carpetas con el branding de Ultra Force.</p></div>
+    <div class="item" data-s="hecho"><h4>Primera gira de reventas</h4><span class="st hecho">Realizado</span><p>Villa Mercedes y Río Cuarto (7/10), Valle de Conlara (8/10) y Mendoza, con el material y el guion listos y el CRM ya operativo.</p></div>
+    <div class="item" data-s="hecho"><h4>Kit de marca Ultra Force</h4><span class="st hecho">Realizado</span><p>Tono, paleta, elementos gráficos y mensajes clave, base de todas las piezas.</p></div>
+    <div class="item" data-s="hecho"><h4>Landing de Ultra Force</h4><span class="st hecho">Realizado</span><p>Se relevaron los errores de la versión anterior, se rehízo el mockup con la aprobación de Juan Ignacio y el equipo comercial, y la landing quedó lista antes de la llegada de la mercadería.</p></div>
+
+    <div class="group">Sunfull</div>
+    <div class="item" data-s="hecho"><h4>Landing de Sunfull online</h4><span class="st hecho">Realizado</span><p>Publicada en sunfulltires.com.ar como destino de la comunicación de la marca y de la red de reventas.</p></div>
+
+    <div class="group">NEUMAR WEEK</div>
+    <div class="item" data-s="hecho"><h4>Concepto: nuestro propio Cyber</h4><span class="st hecho">Realizado</span><p>En lugar de sumarse al Cyber Monday, Neumar creó su propia semana con su propia oferta: comprá 3 neumáticos y llevate el 4°, del 2 al 4/11, con precio congelado para quien cotizara antes.</p></div>
+    <div class="item" data-s="hecho"><h4>Calendario de contenidos</h4><span class="st hecho">Realizado</span><p>Teasers el 30 y el 31/10, comercial con el anuncio del 4x3 el lunes 2/11, video de humor el martes y posts fijos. Todo apto para pauta, historias y estados de WhatsApp de los vendedores.</p></div>
+    <div class="item" data-s="hecho"><h4>Placa de cuotas por medida</h4><span class="st hecho">Realizado</span><p>Valor por cuota comprando 4 en las medidas más pedidas (175/65 R14, 185/60 R15 y 205/55 R16), revisada por el equipo comercial y lista para pauta el 3/11.</p></div>
+    <div class="item" data-s="hecho"><h4>Mensaje automático de la promo</h4><span class="st hecho">Realizado</span><p>Texto fuera de horario con horarios de atención y la promo, para que la consulta nocturna llegue cotizable a primera hora. Activado por sistemas.</p></div>
+    <div class="item" data-s="hecho"><h4>Extensión de la promo</h4><span class="st hecho">Realizado</span><p>Por la respuesta en los mostradores, la promo se extendió día a día con la misma pauta, con placa y un video selfie de Kili. Llega hasta el lunes 9/11, con el mensaje automático actualizado.</p></div>
+
+    <div class="group">Pasa a noviembre</div>
+    <div class="item" data-s="curso"><h4>Briefing de redes para Ultra Force y Sunfull B2B</h4><span class="st curso">En marcha</span><p>Línea de contenidos por marca y por público, minorista y reventa.</p></div>
+    <div class="item" data-s="prox"><h4>Registro de las giras en el CRM</h4><span class="st prox">Pasa a noviembre</span><p>Visitas, reventas interesadas y conversaciones abiertas cargadas por cada vendedor, para seguir cada plaza.</p></div>
+    <div class="item" data-s="prox"><h4>Repesca de cotizaciones</h4><span class="st prox">Pasa a noviembre</span><p>Recuperar cotizaciones sin cerrar y sumar los contactos históricos a la base del CRM.</p></div>
+    <div class="item" data-s="prox"><h4>Campañas de reventa por plaza</h4><span class="st prox">Pasa a noviembre</span><p>Sunfull en San Juan y Villa María, y Ultra Force fuera de San Luis.</p></div>
+    <div class="item" data-s="prox"><h4>Gira a Villa Dolores</h4><span class="st prox">Pasa a noviembre</span><p>Relevamiento de reventas como cliente incógnito y visitas a prospects.</p></div>
+    <div class="item" data-s="prox"><h4>Mercado Libre y comunidad 4x4</h4><span class="st prox">Pasa a noviembre</span><p>Publicaciones de Ultra Force y presencia en grupos, eventos y asociaciones 4x4.</p></div>
+  </div>
+</section>
+
+<!-- ESTADO -->
+<section class="s" id="estado">
+  <div class="sh">
+    <h2>Sistemas y procesos: lo realizado</h2>
+    <p>Los avances concretos del mes en Odoo, CRM y ChatRoom, y lo que ya está en marcha para noviembre.</p>
+  </div>
+  <div class="chips" role="group" aria-label="Filtrar sistemas por estado" data-list="work">
+    <button class="chip" data-f="all" aria-pressed="true">Todo</button>
+    <button class="chip" data-f="hecho" aria-pressed="false">Realizado</button>
+    <button class="chip" data-f="curso" aria-pressed="false">En marcha</button>
+    <button class="chip" data-f="prox" aria-pressed="false">Próximo</button>
+  </div>
+  <div class="work" id="work">
+    <div class="group">Diagnóstico y planificación</div>
+    <div class="item" data-s="hecho"><h4>Auditoría de Odoo</h4><span class="st hecho">Realizado</span><p>Diagnóstico del 12/10 sobre 3 meses de operación: 2.044 órdenes de venta, 957 clientes y 11 depósitos.</p></div>
+    <div class="item" data-s="hecho"><h4>Plan de Trabajo de Sistemas - Procesos de octubre</h4><span class="st hecho">Realizado</span><p>Tres frentes de trabajo (base ordenada, circuito de postventa y piloto en SUC 1) y plan día por día para la semana del 19 al 23.</p></div>
+    <div class="item" data-s="hecho"><h4>Análisis de ChatRoom y reporte de Meta Ads</h4><span class="st hecho">Realizado</span><p>Rendimiento por campaña y tiempos de respuesta del mes, presentados en este informe.</p></div>
+    <div class="item" data-s="hecho"><h4>Definiciones acordadas con Neumar</h4><span class="st hecho">Realizado</span><p>Responsable de postventa asignado en SUC 1, gestión única de postventa para Neumar y FEVE, y Merlo atendida desde el mismo teléfono por todos los vendedores.</p></div>
+
+    <div class="group">Base de datos y CRM</div>
+    <div class="item" data-s="hecho"><h4>Carga de datos de los clientes de mayor compra</h4><span class="st hecho">Realizado</span><p>Completada el sábado 17/10.</p></div>
+    <div class="item" data-s="hecho"><h4>Teléfono y localidad obligatorios al guardar un contacto</h4><span class="st hecho">Realizado</span><p>Regla automática activa desde el 29/10. Entre quienes compraron desde el 13/10, el 57,3% ya tiene teléfono cargado.</p></div>
+    <div class="item" data-s="hecho"><h4>Regla que etiqueta cotizaciones con origen CRM</h4><span class="st hecho">Realizado</span><p>Automatización activa desde el 29/10 sobre las órdenes de venta.</p></div>
+    <div class="item" data-s="curso"><h4>Campaña de actualización de teléfonos</h4><span class="st curso">En marcha</span><p>De los 957 clientes de la auditoría, el 28,9% ya tiene teléfono (eran 23% el 12/10).</p></div>
+    <div class="item" data-s="curso"><h4>Uso del CRM como herramienta diaria</h4><span class="st curso">En marcha</span><p>Pasó de 25 a 244 oportunidades. De las 185 creadas en octubre, 5 ya figuran como ganadas.</p></div>
+
+    <div class="group">ChatRoom y mensajes automáticos</div>
+    <div class="item" data-s="hecho"><h4>Respuesta automática fuera de horario</h4><span class="st hecho">Realizado</span><p>Acción del servidor actualizada el 1/11 con el mensaje de la NEUMAR WEEK, y documentado el paso a paso para cambiarlo cuando haga falta. Respondió 65 veces en octubre. El 5/11 se pasó la nueva versión con la extensión de la promo hasta el 9/11.</p></div>
+    <div class="item" data-s="prox"><h4>Seguimiento automático a clientes cotizados (24 h y 72 h)</h4><span class="st prox">Próximo</span><p>Diseñado con un tope de 15 envíos por día y contacto directo con el cliente, para activarlo en noviembre.</p></div>
+
+    <div class="group">Circuito de postventa V1.0</div>
+    <div class="item" data-s="prox"><h4>Configuración del circuito en Odoo</h4><span class="st prox">Próximo</span><p>Equipo CRM Postventa con etapas en español, campo Patente en la orden de venta y automatización al confirmar una venta.</p></div>
+    <div class="item" data-s="prox"><h4>Segmentación de clientes y catálogo</h4><span class="st prox">Próximo</span><p>Etiquetas Particular, Empresa / Flota y Transporte, y ajustes del catálogo de servicios.</p></div>
+    <div class="item" data-s="prox"><h4>Procedimiento de seguimiento después de cada venta</h4><span class="st prox">Próximo</span><p>Lógica propone el procedimiento para cargar el seguimiento de cada cliente después de la venta.</p></div>
+    <div class="item" data-s="prox"><h4>Piloto en SUC 1</h4><span class="st prox">Próximo</span><p>Arranque con los 80 clientes inactivos con servicio y teléfono directo como primera lista de contactos.</p></div>
+  </div>
+</section>
+
+<!-- NUMEROS -->
+<section class="s alt" id="numeros">
+  <div class="sh">
+    <h2>Cómo están los números</h2>
+    <p>Cuatro vistas: lo que informa Meta, lo que registró ChatRoom, el rendimiento por campaña y la evolución de Odoo.</p>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Vistas de números">
+    <button class="chip" role="tab" data-p="meta" aria-selected="true">Meta Ads</button>
+    <button class="chip" role="tab" data-p="chat" aria-selected="false">ChatRoom</button>
+    <button class="chip" role="tab" data-p="camp" aria-selected="false">Campañas</button>
+    <button class="chip" role="tab" data-p="odoo" aria-selected="false">Odoo</button>
+  </div>
+
+  <!-- META -->
+  <div class="panel" id="p-meta" role="tabpanel">
+    <div class="mini">
+      <div><b class="num">827</b><span>leads (conversaciones)</span></div>
+      <div><b class="num">191.761</b><span>alcance estimado</span></div>
+      <div><b class="num">USD 1.181,37</b><span>inversión total</span></div>
+      <div><b class="num">USD 1,43</b><span>costo por lead</span></div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Leads por sucursal</h3>
+        <p class="cap">Meta, octubre completo</p>
+        <div class="hb">
+          <div class="row"><span>San Luis</span><div class="track"><div class="fill num" style="width:82.1%">679 · 82,1%</div></div></div>
+          <div class="row"><span>Merlo</span><div class="track"><div class="fill g num" style="width:17.9%;min-width:96px">148 · 17,9%</div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Redes orgánicas</h3>
+        <p class="cap">Publicaciones sin inversión</p>
+        <table style="min-width:0">
+          <tbody>
+            <tr><td class="n">Instagram · vistas</td><td class="r">340,0 mil</td></tr>
+            <tr><td class="n">Instagram · interacciones</td><td class="r">960</td></tr>
+            <tr><td class="n">Instagram · seguidores</td><td class="r">+220</td></tr>
+            <tr><td class="n">Facebook · vistas</td><td class="r">1,28 M</td></tr>
+            <tr><td class="n">Facebook · espectadores</td><td class="r">145,2 mil</td></tr>
+            <tr><td class="n">Facebook · seguidores</td><td class="r">+79</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="callout"><b>Del costo por lead al costo por cotización.</b> Las 294 conversaciones de anuncios registradas en ChatRoom generaron 96 cotizaciones. Repartiendo la inversión del mes entre esas 96, cada conversación con cotización costó cerca de USD 12,3. Es una estimación: la inversión incluye los primeros seis días de octubre, que ChatRoom todavía no registraba.</div>
+    <div class="callout"><b>Meta y ChatRoom miden cosas distintas.</b> Meta cuenta las conversaciones iniciadas desde el anuncio. ChatRoom registra, desde el 7/10, las conversaciones en las que el cliente escribió. Por eso la cifra de ChatRoom es menor.</div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="panel" id="p-chat" role="tabpanel" hidden>
+    <div class="mini">
+      <div><b class="num">449</b><span>conversaciones de clientes</span></div>
+      <div><b class="num">88,4%</b><span>atendidas por una persona</span></div>
+      <div><b class="num">33,9%</b><span>llegaron a una cotización</span></div>
+      <div><b class="num">43,9%</b><span>empezaron fuera de horario</span></div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Origen de las conversaciones</h3>
+        <p class="cap">Inferido por el primer mensaje del cliente</p>
+        <div class="hb">
+          <div class="row"><span>Anuncios</span><div class="track"><div class="fill num" style="width:65.5%">294 · 65,5%</div></div></div>
+          <div class="row"><span>Consulta directa</span><div class="track"><div class="fill g num" style="width:34.5%">155 · 34,5%</div></div></div>
+        </div>
+        <p class="note">Anuncios con cotización: 32,7% (96 de 294). Consulta directa: 36,1% (56 de 155).</p>
+      </div>
+      <div class="card">
+        <h3>Velocidad de la primera respuesta</h3>
+        <p class="cap">Porcentaje de conversaciones, en minutos hábiles</p>
+        <div class="hb">
+          <div class="row"><span>Hasta 5 min</span><div class="track"><div class="fill num" style="width:43.1%">43,1%</div></div></div>
+          <div class="row"><span>Hasta 15 min</span><div class="track"><div class="fill num" style="width:67.5%">67,5%</div></div></div>
+        </div>
+        <p class="note">Mediana de 7,0 minutos, medida sobre las conversaciones con respuesta de una persona.</p>
+      </div>
+    </div>
+    <div class="callout"><b>Fuera de horario.</b> Casi 44% de las conversaciones empieza con el negocio cerrado. Por eso la respuesta automática, que envió 65 mensajes en octubre, es una pieza clave: el cliente recibe horarios y novedades mientras espera.</div>
+  </div>
+
+  <!-- CAMPAÑAS -->
+  <div class="panel" id="p-camp" role="tabpanel" hidden>
+    <p class="note" style="margin:0 0 14px">Cada campaña se identificó por el texto precargado que abre el chat. Las de menos de 20 conversaciones sirven como señal, no como conclusión.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Campaña</th><th class="r">Conversaciones</th><th class="r">1ª respuesta (min)</th><th>Con cotización</th></tr></thead>
+        <tbody>
+          <tr><td class="n">4 neumáticos por $40.000 al mes</td><td class="r">104</td><td class="r">6,5</td><td><div class="bar"><i style="width:29.8%"></i><span>29,8%</span></div></td></tr>
+          <tr><td class="n">12 cuotas sin interés con BNA</td><td class="r">61</td><td class="r">7,9</td><td><div class="bar"><i style="width:41%"></i><span>41,0%</span></div></td></tr>
+          <tr><td class="n">Promo BNA</td><td class="r">37</td><td class="r">13,2</td><td><div class="bar"><i style="width:32.4%"></i><span>32,4%</span></div></td></tr>
+          <tr><td class="n">18 cuotas con Naranja X</td><td class="r">25</td><td class="r">6,5</td><td><div class="bar"><i style="width:32%"></i><span>32,0%</span></div></td></tr>
+          <tr><td class="n">12 cuotas con Mercado Pago</td><td class="r">20</td><td class="r">6,5</td><td><div class="bar"><i style="width:15%"></i><span>15,0%</span></div></td></tr>
+          <tr><td class="n">Promo Mercado Pago</td><td class="r">16</td><td class="r">4,8</td><td><div class="bar"><i style="width:37.5%"></i><span>37,5%</span></div></td></tr>
+          <tr><td class="n">Revisión de tren delantero</td><td class="r">11</td><td class="r">4,3</td><td><div class="bar"><i style="width:0%"></i><span>0,0%</span></div></td></tr>
+          <tr><td class="n">Genérico «me interesa cambiar…»</td><td class="r">10</td><td class="r">5,2</td><td><div class="bar"><i style="width:50%"></i><span>50,0%</span></div></td></tr>
+          <tr><td class="n">10 cuotas con Naranja X</td><td class="r">7</td><td class="r">2,6</td><td><div class="bar"><i style="width:57.1%"></i><span>57,1%</span></div></td></tr>
+          <tr><td class="n">12 cuotas con Supervielle</td><td class="r">3</td><td class="r">16,2</td><td><div class="bar"><i style="width:66.7%"></i><span>66,7%</span></div></td></tr>
+          <tr><td class="n">Consulta directa (sin anuncio)</td><td class="r">155</td><td class="r">7,5</td><td><div class="bar"><i class="g" style="width:36.1%"></i><span>36,1%</span></div></td></tr>
+          <tr class="tot"><td>Total</td><td class="r">449</td><td class="r">7,0</td><td><div class="bar"><i class="g" style="width:33.9%"></i><span>33,9%</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="msgs" style="margin-top:18px">
+      <div class="msg"><span class="tag g">Mejor combinación</span><h3>12 cuotas sin interés con BNA</h3><p>61 conversaciones y 41% con cotización, por encima de la consulta directa.</p></div>
+      <div class="msg"><span class="tag g">Mayor volumen</span><h3>4 neumáticos por $40.000 al mes</h3><p>Es la campaña que más conversaciones trae (104), con un 29,8% que llega a cotización.</p></div>
+      <div class="msg"><span class="tag t">Para optimizar en noviembre</span><h3>Campañas con margen de mejora</h3><p>Mercado Pago 12 cuotas y la revisión de tren delantero son las candidatas a ajustar mensaje y oferta con los datos de octubre.</p></div>
+    </div>
+    <p class="note">Los montos de venta no se muestran. Con solo 5 oportunidades ganadas en el mes, las campañas se comparan por cotizaciones y no por ventas.</p>
+  </div>
+
+  <!-- ODOO -->
+  <div class="panel" id="p-odoo" role="tabpanel" hidden>
+    <p class="note" style="margin:0 0 14px">Medición del 5/11 sobre los mismos 957 clientes de la auditoría del 12/10, cuando el indicador permite compararlo.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Indicador</th><th class="r">12/10</th><th class="r">5/11</th><th>Lectura</th></tr></thead>
+        <tbody>
+          <tr><td class="n">Clientes con teléfono cargado</td><td class="r">23%</td><td class="r">28,9%</td><td><span class="st hecho">Mejoró</span></td></tr>
+          <tr><td class="n">Compradores desde el 13/10 con teléfono</td><td class="r">sin dato</td><td class="r">57,3%</td><td><span class="st hecho">Regla activa</span></td></tr>
+          <tr><td class="n">Oportunidades en el CRM</td><td class="r">25</td><td class="r">244</td><td><span class="st hecho">En uso diario</span></td></tr>
+          <tr><td class="n">Reglas automáticas de validación y origen</td><td class="r">1</td><td class="r">3</td><td><span class="st hecho">Se sumaron 2</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">La base ya muestra que el 78% de los clientes compró una sola vez en el trimestre: es la principal oportunidad que atiende el circuito de postventa.</p>
+  </div>
+</section>
+
+<!-- ESTRATEGIA -->
+<section class="s" id="estrategia">
+  <div class="sh">
+    <h2>Mercado y planificación: adentro con todo, afuera mayorista</h2>
+    <p>La estrategia comercial que validó Juan Ignacio a partir del resultado de la NEUMAR WEEK, y que guía el marketing de acá en adelante.</p>
+  </div>
+  <div class="callout" style="margin-top:0;margin-bottom:22px"><b>Lo que cambió.</b> Históricamente Neumar no bajaba precios en mostrador para cuidar a su red de reventas. En la NEUMAR WEEK, con una oferta agresiva en los mostradores propios, el resultado fue muy bueno. La lectura es clara: los mostradores de San Luis y Merlo están listos para salir a la cancha a jugar el partido.</div>
+  <div class="two">
+    <div class="card">
+      <span class="pr">Adentro</span>
+      <h3 style="margin-top:4px">San Luis y Merlo compiten en minorista</h3>
+      <p class="cap">Mostradores propios, cliente final</p>
+      <ul class="plain">
+        <li><b>Ofertas agresivas en mostrador</b>, con la NEUMAR WEEK como modelo: una promo simple, con fecha y con pauta.</li>
+        <li><b>Ultra Force 100% mostrador</b> a su llegada: una estrategia de lanzamiento súper agresiva, con piezas grabadas y ordenadas la semana próxima.</li>
+        <li><b>Atención rápida y seguimiento</b> en ChatRoom y el CRM, para que cada consulta de la pauta termine en cotización.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="pr">Afuera</span>
+      <h3 style="margin-top:4px">La reventa se busca fuera de San Luis y Merlo</h3>
+      <p class="cap">Red mayorista de Sunfull y Ultra Force</p>
+      <ul class="plain">
+        <li><b>Giras por plaza</b> (Córdoba, Mendoza, San Juan, Valle de Conlara, Villa Dolores), con cada visita registrada en el CRM.</li>
+        <li><b>Campañas de reventa por plaza</b> y paquete comercial propio para la red, separado del precio de mostrador.</li>
+        <li><b>Relación con los mejores clientes:</b> regalo de fin de año para los principales clientes Sunfull, mayoristas y empresas.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Referentes a seguir de cerca: Altamirano, la empresa más parecida a Neumar en concepción, estructura y visión. Corral también salió con una oferta 4x3 en el mismo período.</p>
+</section>
+
+<!-- NOVIEMBRE -->
+<section class="s alt" id="noviembre">
+  <div class="sh">
+    <h2>Objetivos para noviembre</h2>
+    <p>Propuesta de Lógica para seguir construyendo sobre lo logrado, por vertical. Las metas de sistemas parten de la medición de octubre.</p>
+  </div>
+  <h3 class="sub" style="margin-top:0">Marketing</h3>
+  <div class="goals" style="margin-bottom:8px">
+    <div class="goal">
+      <div><span class="pr">Prioridad 1</span><h3 style="margin-top:4px">Lanzamiento de Ultra Force en mostrador</h3></div>
+      <p class="why">La llegada de la mercadería es la próxima gran oportunidad de los mostradores propios.</p>
+      <div class="met">
+        <div><span class="k">Estrategia de lanzamiento en mostrador</span><span class="a">pedida</span><span class="arr">→</span><span class="t">aprobada</span></div>
+        <div><span class="k">Piezas grabadas y calendario</span><span class="a">por grabar</span><span class="arr">→</span><span class="t">listos al arribo</span></div>
+        <div><span class="k">Pauta dirigida a la landing de Ultra Force</span><span class="a">landing lista</span><span class="arr">→</span><span class="t">activa</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 2</span><h3 style="margin-top:4px">Medir y capitalizar la NEUMAR WEEK</h3></div>
+      <p class="why">Fue el primer gran test del mostrador agresivo. Hay que medirlo para repetirlo con datos.</p>
+      <div class="met">
+        <div><span class="k">Resultado (conversaciones, cotizaciones, ventas)</span><span class="a">en curso</span><span class="arr">→</span><span class="t">medido</span></div>
+        <div><span class="k">Seguimiento a quienes cotizaron y no compraron</span><span class="a">—</span><span class="arr">→</span><span class="t">contactados</span></div>
+        <div><span class="k">Formato de promo de mostrador repetible</span><span class="a">1 hecha</span><span class="arr">→</span><span class="t">definido</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 3</span><h3 style="margin-top:4px">Red mayorista afuera</h3></div>
+      <p class="why">La reventa crece fuera de San Luis y Merlo, con seguimiento en el CRM.</p>
+      <div class="met">
+        <div><span class="k">Giras registradas en el CRM</span><span class="a">sin registro</span><span class="arr">→</span><span class="t">100%</span></div>
+        <div><span class="k">Gira a Villa Dolores</span><span class="a">pendiente</span><span class="arr">→</span><span class="t">hecha</span></div>
+        <div><span class="k">Campañas de reventa por plaza</span><span class="a">pendientes</span><span class="arr">→</span><span class="t">activas</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 4</span><h3 style="margin-top:4px">Regalo de fin de año a clientes Sunfull</h3></div>
+      <p class="why">Fidelizar a los mejores clientes de la red antes de fin de año, con una selección hecha desde el CRM.</p>
+      <div class="met">
+        <div><span class="k">Lista de clientes segmentada en 3 niveles</span><span class="a">—</span><span class="arr">→</span><span class="t">definida</span></div>
+        <div><span class="k">Regalo general, personalizado y tope de gama</span><span class="a">idea</span><span class="arr">→</span><span class="t">comprado</span></div>
+      </div>
+    </div>
+  </div>
+  <h3 class="sub">Sistemas y procesos</h3>
+  <div class="goals">
+    <div class="goal">
+      <div><span class="pr">Prioridad 1</span><h3 style="margin-top:4px">Circuito de postventa y piloto en SUC 1</h3></div>
+      <p class="why">Con el responsable asignado y la gestión unificada, el circuito está listo para configurarse. El 78% de los clientes compró una sola vez.</p>
+      <div class="met">
+        <div><span class="k">Circuito V1.0 configurado en Odoo</span><span class="a">diseñado</span><span class="arr">→</span><span class="t">activo</span></div>
+        <div><span class="k">Prueba con clientes reales</span><span class="a">10 a 20</span><span class="arr">→</span><span class="t">completa</span></div>
+        <div><span class="k">Lista de arranque contactada</span><span class="a">80 clientes</span><span class="arr">→</span><span class="t">≥ 80%</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 2</span><h3 style="margin-top:4px">Atención más rápida</h3></div>
+      <p class="why">Sobre una base ya ágil, el objetivo es que casi todas las conversaciones reciban respuesta en minutos.</p>
+      <div class="met">
+        <div><span class="k">Conversaciones atendidas por una persona</span><span class="a">88,4%</span><span class="arr">→</span><span class="t">≥ 95%</span></div>
+        <div><span class="k">Primera respuesta en 15 min o menos</span><span class="a">67,5%</span><span class="arr">→</span><span class="t">≥ 75%</span></div>
+        <div><span class="k">Mediana de primera respuesta</span><span class="a">7,0 min</span><span class="arr">→</span><span class="t">≤ 5 min</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 3</span><h3 style="margin-top:4px">Seguimiento después de cada venta</h3></div>
+      <p class="why">Lógica propone el procedimiento para que cada venta quede con su seguimiento cargado, y mide qué campañas convierten mejor.</p>
+      <div class="met">
+        <div><span class="k">Procedimiento de seguimiento definido y en uso</span><span class="a">propuesto</span><span class="arr">→</span><span class="t">en uso</span></div>
+        <div><span class="k">Cotización en conversaciones de anuncios</span><span class="a">32,7%</span><span class="arr">→</span><span class="t">≥ 36%</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 4</span><h3 style="margin-top:4px">Datos de contacto completos</h3></div>
+      <p class="why">La regla nueva ya funciona con los compradores recientes. Ahora se amplía a la base histórica.</p>
+      <div class="met">
+        <div><span class="k">Clientes con teléfono (base de 957)</span><span class="a">28,9%</span><span class="arr">→</span><span class="t">≥ 40%</span></div>
+      </div>
+    </div>
+    <div class="goal">
+      <div><span class="pr">Prioridad 5</span><h3 style="margin-top:4px">Seguimiento a cotizados y cierre de la NEUMAR WEEK</h3></div>
+      <p class="why">Los clientes cotizados que todavía no compraron son la oportunidad más económica de recuperar.</p>
+      <div class="met">
+        <div><span class="k">Seguimiento a las 24 h y 72 h</span><span class="a">diseñado</span><span class="arr">→</span><span class="t">activo</span></div>
+        <div><span class="k">Resultado de la NEUMAR WEEK</span><span class="a">en curso</span><span class="arr">→</span><span class="t">medido</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Las metas son una propuesta de Lógica y se ajustan con Neumar.</p>
+
+  <h3 class="sub">Acuerdos y próximos pasos</h3>
+  <div class="agree">
+    <div class="card">
+      <h3>Acordado con Neumar</h3>
+      <ul>
+        <li><span class="ck">✓</span><span><b>Responsable de postventa en SUC 1:</b> asignado, Rodrigo.</span></li>
+        <li><span class="ck">✓</span><span><b>Neumar y FEVE:</b> la postventa se gestiona toda junta.</span></li>
+        <li><span class="ck">✓</span><span><b>Merlo:</b> se atiende desde el mismo teléfono, con todos los vendedores, por lo que ya está dentro de ChatRoom.</span></li>
+        <li><span class="ck">✓</span><span><b>Estrategia comercial:</b> San Luis y Merlo compiten en minorista, y la reventa se busca afuera.</span></li>
+        <li><span class="ck">✓</span><span><b>Marketing:</b> canal único a través de Lógica y semáforo de demanda como tablero del equipo.</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Próximos pasos</h3>
+      <ul>
+        <li><span class="ar">→</span><span><b>Lógica:</b> propone el procedimiento para cargar el seguimiento después de cada venta.</span></li>
+        <li><span class="ar">→</span><span><b>Lógica:</b> presenta la estrategia de lanzamiento de Ultra Force en mostrador y el semáforo de noviembre.</span></li>
+        <li><span class="ar">→</span><span><b>Con Neumar:</b> seguir cargando el teléfono del cliente en cada venta, que es la base de todo seguimiento.</span></li>
+        <li><span class="ar">→</span><span><b>Equipo comercial:</b> registrar cada visita de las giras en el CRM.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- METODO -->
+<section class="s" id="metodo">
+  <div class="sh">
+    <h2>Método y límites de los datos</h2>
+    <p>Para leer los números con el criterio correcto.</p>
+  </div>
+  <ul class="plain">
+    <li><b>Período del chat:</b> el primer mensaje registrado en ChatRoom es del 7 de octubre. Los números de chat cubren del 7 al 31, no el mes completo.</li>
+    <li><b>Conversaciones:</b> 449 de clientes, sobre 6.412 mensajes. Se excluyeron 2 grupos internos y los avisos automáticos del sistema.</li>
+    <li><b>Campañas:</b> Odoo no guarda el anuncio de origen. Se deduce del texto precargado del primer mensaje del cliente, así que no es un dato de la plataforma de anuncios.</li>
+    <li><b>Cotizaciones:</b> conversaciones cuyo contacto tiene una cotización o venta no cancelada creada después de su primer mensaje. Pueden incluir compras con otro origen.</li>
+    <li><b>Tiempos de respuesta:</b> minutos hábiles entre un mensaje del cliente y la siguiente respuesta de una persona. Domingos y el feriado del 12/10 no cuentan, y las respuestas automáticas no se consideran respuesta.</li>
+    <li><b>Meta Ads:</b> cifras tomadas del reporte «Neumar BI» de octubre (827 leads, USD 1.181,37 de inversión, alcance de 191.761).</li>
+    <li><b>Montos de venta:</b> no se informan en este documento, solo porcentajes.</li>
+    <li><b>Marketing:</b> avances tomados del semáforo de demanda de octubre y del grupo de trabajo MARKETEAM, hasta el 5/11. La NEUMAR WEEK sigue en curso, así que su resultado se informa en el cierre de noviembre.</li>
+  </ul>
+</section>
+
+<footer>
+  <div><b>Lógica</b> · Optimización de procesos comerciales y operativos</div>
+  <div><a href="https://somoslogica.com.ar">somoslogica.com.ar</a> · San Luis, Argentina</div>
+</footer>
+</main>
+
+<button class="totop" id="totop" aria-label="Volver arriba">↑</button>
+
+<script>
+(function(){
+  document.querySelectorAll('.chips[data-list]').forEach(function(bar){
+    var list=document.getElementById(bar.dataset.list); if(!list) return;
+    var chips=bar.querySelectorAll('[data-f]'), items=list.querySelectorAll('.item'), groups=list.querySelectorAll('.group');
+    function applyFilter(f){
+      chips.forEach(function(c){c.setAttribute('aria-pressed',String(c.dataset.f===f))});
+      items.forEach(function(i){i.hidden=(f!=='all'&&i.dataset.s!==f)});
+      groups.forEach(function(g){
+        var n=g.nextElementSibling, any=false;
+        while(n&&!n.classList.contains('group')){ if(!n.hidden) any=true; n=n.nextElementSibling; }
+        g.hidden=!any;
+      });
+    }
+    chips.forEach(function(c){c.addEventListener('click',function(){applyFilter(c.dataset.f)})});
+  });
+
+  var tabs=document.querySelectorAll('[data-p]');
+  function showTab(p){
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.p===p))});
+    document.querySelectorAll('.panel').forEach(function(x){x.hidden=(x.id!=='p-'+p)});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){showTab(t.dataset.p)})});
+
+  var links=document.querySelectorAll('#nav a'), map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var ids=Object.keys(map);
+  function spy(){
+    var y=window.scrollY+120, cur=ids[0];
+    ids.forEach(function(id){var el=document.getElementById(id); if(el&&el.offsetTop<=y) cur=id;});
+    links.forEach(function(a){a.classList.toggle('on',a===map[cur])});
+    var nav=document.getElementById('nav'); nav.scrollTo({left:map[cur].offsetLeft-20,behavior:'auto'});
+    document.getElementById('totop').classList.toggle('show',window.scrollY>600);
+  }
+  window.addEventListener('scroll',spy,{passive:true}); spy();
+  document.getElementById('totop').addEventListener('click',function(){window.scrollTo({top:0})});
+})();
+</script>
+</body>
+</html>
