@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neumar · Análisis 1 al 20 Septiembre - Octubre - Noviembre</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* Layout: informe de cierre en una columna, navegación fija arriba, secciones con fondo alternado.
+   Branding Lógica: turquesa #0094BA, carbón #2A2A2E, gris #E2E2E1, Poppins, círculos y diagonal de portada. */
+:root{
+  --bg:#F5F8F9; --surface:#FFFFFF; --ink:#2A2A2E; --muted:#62666C; --line:#E2E2E1;
+  --on-teal:#FFFFFF; --teal:#0094BA; --teal-text:#00718F; --teal-soft:#DCEFF5; --gray:#C4C4C4;
+  --ok:#1F7A52; --ok-soft:#DDF1E6; --warn:#8A5A00; --warn-soft:#FBEFD2;
+  --info:#00718F; --info-soft:#DCEFF5;
+  --font:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#111416; --surface:#1A1E21; --ink:#ECEFF1; --muted:#9AA3AA; --line:#2B3236;
+  --on-teal:#06222B; --teal:#2BB8DC; --teal-text:#5FD0EC; --teal-soft:#10323D; --gray:#4A5258;
+  --ok:#5FD39B; --ok-soft:#14332A; --warn:#F0C060; --warn-soft:#3A2D10;
+  --info:#5FD0EC; --info-soft:#10323D; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#111416; --surface:#1A1E21; --ink:#ECEFF1; --muted:#9AA3AA; --line:#2B3236;
+  --on-teal:#06222B; --teal:#2BB8DC; --teal-text:#5FD0EC; --teal-soft:#10323D; --gray:#4A5258;
+  --ok:#5FD39B; --ok-soft:#14332A; --warn:#F0C060; --warn-soft:#3A2D10;
+  --info:#5FD0EC; --info-soft:#10323D; color-scheme:dark; }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.2;margin:0}
+p{margin:0}
+a{color:var(--teal-text)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto}
+
+/* Header */
+.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:56px}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em;white-space:nowrap}
+.brand b{color:var(--teal)}
+.brand small{font-weight:500;color:var(--muted);font-size:12px;margin-left:8px;letter-spacing:.02em}
+nav{display:flex;gap:4px;overflow-x:auto;min-width:0;flex:1;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px}
+nav a:hover{color:var(--ink)}
+nav a.on{background:var(--teal-soft);color:var(--teal-text);font-weight:600}
+@media (max-width:640px){.brand small{display:none}}
+
+/* CTA avances de noviembre */
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:var(--on-teal);text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:999px}
+.cta:hover{filter:brightness(1.08)}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.hero .cta{margin-top:24px}
+.callout.cta-box{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:56px 0 44px}
+.hero .deco{position:absolute;right:-90px;top:-40px;width:460px;max-width:70vw;pointer-events:none;opacity:.95}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-text)}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:700;letter-spacing:-.02em;margin:12px 0 14px;max-width:14ch}
+.hero .lead{max-width:56ch;color:var(--muted);font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:13px;color:var(--muted)}
+.meta span b{color:var(--ink);font-weight:600}
+.kpis{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:36px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px}
+.kpi .v{font-size:32px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.kpi .l{font-size:13px;color:var(--muted);margin-top:6px}
+.kpi .d{font-size:12px;font-weight:600;margin-top:8px;display:inline-block;padding:2px 9px;border-radius:999px}
+.d.up{background:var(--ok-soft);color:var(--ok)} .d.flat{background:var(--info-soft);color:var(--info)}
+
+/* Sections */
+section.s{padding:56px 0;border-top:1px solid var(--line)}
+section.alt{background:var(--surface);margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sh{display:grid;gap:8px;margin-bottom:28px;max-width:68ch}
+.sh h2{font-size:clamp(26px,4vw,34px);font-weight:700;letter-spacing:-.015em}
+.sh p{color:var(--muted)}
+h3{font-size:18px;font-weight:600}
+.sub{margin:30px 0 12px}
+
+/* Messages */
+.msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.msg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.msg h3{margin-bottom:8px}
+.msg p{color:var(--muted);font-size:14px}
+.msg .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.tag.g{color:var(--ok)} .tag.t{color:var(--teal-text)}
+
+/* Chips / filters */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip:hover{border-color:var(--teal);color:var(--ink)}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .chip[aria-pressed="true"],:root:not([data-theme="light"]) .chip[aria-selected="true"]{color:#06222B}}
+:root[data-theme="dark"] .chip[aria-pressed="true"],:root[data-theme="dark"] .chip[aria-selected="true"]{color:#06222B}
+.st{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.st.hecho{background:var(--ok-soft);color:var(--ok)} .st.curso{background:var(--warn-soft);color:var(--warn)}
+.st.prox{background:var(--info-soft);color:var(--info)}
+
+/* Work list */
+.work{display:grid;gap:10px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:start}
+section.alt .item{background:var(--bg)}
+.item h4{font-size:15px;font-weight:600}
+.item p{grid-column:1;color:var(--muted);font-size:13.5px}
+.item .st{grid-row:1;grid-column:2}
+.group{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:22px 0 4px}
+.item[hidden],.group[hidden]{display:none}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:22px;padding-bottom:4px}
+.tabs .chip{white-space:nowrap}
+.panel[hidden]{display:none}
+
+/* Tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
+th{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+td.n{font-weight:500}
+.bar{display:flex;align-items:center;gap:10px;min-width:150px}
+.bar i{display:block;height:8px;border-radius:4px;background:var(--teal);min-width:2px}
+.bar i.g{background:var(--gray)}
+.bar span{font-size:13px;white-space:nowrap}
+tr.tot td{font-weight:600;background:var(--bg)}
+.note{margin-top:14px;font-size:13px;color:var(--muted);max-width:75ch}
+
+/* Charts */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+section.alt .card{background:var(--bg)}
+.card h3{margin-bottom:4px} .card .cap{font-size:13px;color:var(--muted);margin-bottom:16px}
+.hb{display:grid;gap:12px}
+.hb .row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;font-size:13px}
+.hb .track{background:var(--line);border-radius:6px;height:26px;position:relative;overflow:hidden}
+.hb .fill{height:100%;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:12px;font-weight:600;min-width:42px}
+.hb .fill.g{background:var(--gray);color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hb .fill{color:#06222B}}
+:root[data-theme="dark"] .hb .fill{color:#06222B}
+.mini{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.mini div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+section.alt .mini div{background:var(--bg)}
+.mini b{display:block;font-size:24px;font-weight:700;letter-spacing:-.01em}
+.mini span{font-size:12.5px;color:var(--muted)}
+
+/* Callout */
+.callout{border-radius:12px;padding:16px 18px;margin-top:18px;font-size:14px;max-width:78ch;background:var(--teal-soft);color:var(--ink)}
+.callout b{font-weight:600}
+
+/* Goals */
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.goal{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:14px;align-content:start}
+section.alt .goal{background:var(--bg)}
+.goal h3{font-size:18px}
+.goal .why{font-size:13.5px;color:var(--muted)}
+.met{display:grid;gap:8px}
+.met div{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:baseline;font-size:13px;border-top:1px solid var(--line);padding-top:8px}
+.met .k{color:var(--ink)} .met .a{color:var(--muted)} .met .arr{color:var(--teal)} .met .t{font-weight:700;color:var(--teal-text)}
+.pr{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-text)}
+
+/* Agreements */
+.agree{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.agree .card ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:14px;color:var(--muted)}
+.agree .card li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.agree .card li b{color:var(--ink);font-weight:600}
+.agree .ck{color:var(--ok);font-weight:700}
+.agree .ar{color:var(--teal);font-weight:700}
+
+ul.plain{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+ul.plain b{color:var(--ink);font-weight:600}
+
+footer{padding:40px 0 56px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+footer b{color:var(--ink)}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--teal-text);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;z-index:25}
+.totop.show{opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.totop{transition:none}}
+
+/* Análisis de ventas: componentes propios con los mismos tokens */
+.hero h1{max-width:none}
+.back{margin-left:auto;white-space:nowrap;text-decoration:none;font-size:13px;font-weight:600;color:var(--teal-text);padding:8px 12px;border-radius:999px;background:var(--teal-soft)}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.gap{margin-top:14px}
+.kpi .v.sm{font-size:22px}
+.kpi .s{font-size:12.5px;color:var(--muted);margin-top:8px}
+.dl{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.dl.up{background:var(--ok-soft);color:var(--ok)}.dl.dn{background:var(--warn-soft);color:var(--warn)}.dl.eq,.dl.na{background:var(--info-soft);color:var(--info)}
+.card.good-b{border-left:4px solid var(--ok)}.card.bad-b{border-left:4px solid var(--warn)}.card.info-b{border-left:4px solid var(--teal)}
+.card ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.card ul b{color:var(--ink);font-weight:600}
+.card p{color:var(--muted);font-size:14px}
+.card p b{color:var(--ink)}
+.card .tw{border:0;border-radius:0;background:transparent}
+.card h3{margin-bottom:8px}
+.chartbox{position:relative;height:300px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 10px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.sub2{font-size:11.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><b>Lógica</b><small>Neumar · Análisis de ventas</small></div>
+    <nav id="nav" aria-label="Secciones"><a href="#resumen">Resumen</a><a href="#margen">Margen</a><a href="#segmentos">Segmentos</a><a href="#ventas">Ventas</a><a href="#mostrador">Mostrador</a><a href="#vendedores">Vendedores</a><a href="#productos">Productos</a><a href="#proyeccion">Proyección</a><a href="#clientes">Clientes</a><a href="#cierre">Cierre</a></nav>
+    <a class="back" href="index.html">← Informe de cierre</a>
+  </div>
+</header>
+<main class="wrap">
+<div class="hero" id="resumen">
+  <svg class="deco" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="250" cy="170" r="150" fill="none" stroke="#C4C4C4" stroke-width="40" opacity=".55"/>
+    <circle cx="190" cy="190" r="165" fill="none" stroke="#0094BA" stroke-width="40" opacity=".22"/>
+    <polygon points="430,20 430,70 150,350 100,350" fill="#0094BA" opacity=".18"/>
+  </svg>
+  <div style="position:relative">
+    <div class="eyebrow">Neumar · Ventas y márgenes</div>
+    <h1>Análisis 1 al 20 Septiembre - Octubre - Noviembre</h1>
+    <p class="lead">Comparativa de ventas por tipo de cliente y por vendedor, cómo se calcula el margen del reporte «Cuadro de mando comercial», medidas, servicios y marcas, y la proyección de noviembre.</p>
+    <div class="meta">
+      <span>Preparado por <b>Lógica</b></span>
+      <span>Fecha de corte <b>21 de noviembre de 2026, 16:00</b></span>
+      <span>Importes <b>sin IVA</b></span>
+      <span>Fuente <b>pedidos confirmados en Odoo (3.101 líneas, 1.947 pedidos)</b></span>
+    </div>
+  </div>
+  <div class="kpis">
+<div class="kpi"><div class="l">Mostrador 1–20 (M)</div><div class="v sm">40,8 → 36,7 → 55,1</div><div class="s">Nov vs Oct <span class="dl up">▲ +50%</span> · vs Sep <span class="dl up">▲ +35%</span></div></div>
+<div class="kpi"><div class="l">Pedidos de Mostrador por día</div><div class="v sm">7,3 → 8,4 → 11,6</div><div class="s">Antes del Chatroom → implementación → 100% activo</div></div>
+<div class="kpi"><div class="l">Mayorista / Reventa 1–20 (M)</div><div class="v sm">136,8 → 96,7 → 64,7</div><div class="s">Nov vs Oct <span class="dl dn">▼ -33%</span> · vs Sep <span class="dl dn">▼ -53%</span></div></div>
+<div class="kpi"><div class="l">Margen total 1–20</div><div class="v sm">34,8% → 38,2% → 43,3%</div><div class="s">Margen en pesos: 93,1 → 84,5 → 95,2 M</div></div>
+  </div>
+</div>
+<section class="s" id="margen">
+<div class="sh"><h2>Cómo se calcula el margen del reporte</h2><p>El reporte "Cuadro de mando comercial" (Ventas → Reportes) calcula el margen por cada línea de pedido y después lo suma.</p></div>
+
+
+<div class="grid g2">
+<div class="card"><h3>Fórmula</h3>
+<p style="margin:0 0 8px"><b>Margen de la línea = Subtotal sin IVA − (Cantidad × Costo del producto)</b></p>
+<ul>
+<li><b>Subtotal sin IVA:</b> lo facturado en la línea del pedido, ya con descuentos.</li>
+<li><b>Costo del producto:</b> el costo cargado en la ficha del producto en Odoo (hoy, no el histórico del mes de la venta).</li>
+<li><b>Margen %:</b> margen total dividido ventas sin IVA.</li>
+<li>La fórmula usa solo precio y costo del producto: no descuenta comisiones, flete, costo financiero ni impuestos.</li>
+<li><b>Productos sin costo cargado</b> (servicios como balanceo o servicio completo, y 4% de lo vendido): el costo vale cero, así que <b>el margen es el 100% del precio</b>.</li>
+</ul></div>
+<div class="card"><h3>Ejemplos reales (noviembre)</h3><div class="tw"><table>
+<tr><th>Línea</th><th class="r">Cant.</th><th class="r">Subtotal</th><th class="r">Costo unit.</th><th class="r">Margen</th><th class="r">%</th></tr>
+<tr><td>185/60 R15 Sunfull SF60</td><td class="r">2</td><td class="r">114.214,88</td><td class="r">39.016</td><td class="r">36.182,88</td><td class="r">31,7%</td></tr>
+<tr><td>195/75 R16 Sunfull</td><td class="r">2</td><td class="r">297.520,68</td><td class="r">64.398</td><td class="r">168.724,68</td><td class="r">56,7%</td></tr>
+<tr><td>Servicio completo</td><td class="r">1</td><td class="r">90.834,02</td><td class="r">0</td><td class="r">90.834,02</td><td class="r">100%</td></tr>
+</table></div>
+<p class="note">Reproduje el cálculo línea por línea y coincide con el reporte: margen de 156,8 M en septiembre, 165,3 M en octubre y 97,0 M en noviembre a hoy (37,0%, 38,6% y 43,4% del total del mes).</p></div>
+</div>
+<div class="card bad-b" style="margin-top:14px"><h3>Qué hay que tener en cuenta al leerlo</h3><ul>
+<li>Los pedidos de solo servicios o repuestos tienen margen de 59% a 82%, y suben el promedio general. Los neumáticos rinden entre 25% y 45% según el cliente.</li>
+<li>Si se cambia el costo de un producto en la ficha, el margen de las ventas pasadas se recalcula con el costo nuevo.</li>
+<li>Un 4% de lo vendido son productos sin costo cargado (34 de 367 productos). Conviene completarlos para que el margen sea más real.</li>
+</ul></div>
+
+</section>
+<section class="s alt" id="segmentos">
+<div class="sh"><h2>Cómo se separa Mostrador de Mayorista</h2><p>Por cliente y por tipo de operación, sin mirar el equipo de ventas. Solo existen dos etiquetas de cliente en Odoo; "Cliente Reventa" está en 71 de los 963 clientes que compraron desde septiembre.</p></div>
+
+
+<div class="grid g2">
+<div class="card"><h3>Reglas usadas</h3><ul>
+<li><b>Mayorista / Reventa:</b> cliente con la etiqueta "Cliente Reventa".</li>
+<li><b>Mostrador:</b> cliente sin etiqueta con condición fiscal "Consumidor Final", salvo el canal Seguros / MELI / Otros, que se muestra aparte porque no es venta de sucursal.</li>
+<li><b>Empresas sin etiqueta:</b> clientes con CUIT (Responsable Inscripto, Monotributo, Exento) sin la etiqueta de reventa. Mezcla compras de mostrador con factura A, flotas y posibles mayoristas sin etiquetar; no se forzó a ningún lado.</li>
+</ul></div>
+<div class="card"><h3>Perfil de cada segmento (1–20 nov)</h3><div class="tw"><table>
+<tr><th>Segmento</th><th class="r">Clientes</th><th class="r">Pedidos</th><th class="r">Ticket prom.</th><th class="r">Neum. por pedido</th><th class="r">Margen</th><th class="r">% de ventas</th></tr>
+<tr><td><b>Mostrador (consumidor final, sucursales)</b></td><td class='r'>162</td><td class='r'>197</td><td class='r'>280 mil</td><td class='r'>2,2</td><td class='r'>53,9%</td><td class='r'>25%</td></tr><tr><td><b>Consumidor final vía Seguros / MELI / Otros</b></td><td class='r'>47</td><td class='r'>52</td><td class='r'>469 mil</td><td class='r'>2,7</td><td class='r'>48,2%</td><td class='r'>11%</td></tr><tr><td><b>Empresas sin etiqueta de reventa</b></td><td class='r'>111</td><td class='r'>166</td><td class='r'>456 mil</td><td class='r'>1,8</td><td class='r'>39,1%</td><td class='r'>34%</td></tr><tr><td><b>Mayorista / Reventa (etiqueta "Cliente Reventa")</b></td><td class='r'>41</td><td class='r'>106</td><td class='r'>610 mil</td><td class='r'>6,6</td><td class='r'>37,4%</td><td class='r'>29%</td></tr>
+</table></div></div>
+</div>
+<div class="card" style="margin-top:14px"><h3>Por tamaño de operación (neumáticos por pedido, 1–20)</h3><div class="tw"><table>
+<tr><th>Neumáticos por pedido</th><th class="r">Ventas Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Margen Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Pedidos Sep / Oct / Nov</th></tr>
+<tr><td>Sin neumáticos (servicios, repuestos)</td><td class="r">14,2</td><td class="r">8,2</td><td class="r">12,2</td><td class="r">81,3%</td><td class="r">82,3%</td><td class="r">59,0%</td><td class="r">144 / 107 / 148</td></tr>
+<tr><td>1 a 3</td><td class="r">45,1</td><td class="r">44,6</td><td class="r">44,9</td><td class="r">40,1%</td><td class="r">44,1%</td><td class="r">43,9%</td><td class="r">137 / 149 / 143</td></tr>
+<tr><td>4 a 7</td><td class="r">75,3</td><td class="r">83,1</td><td class="r">116,0</td><td class="r">41,3%</td><td class="r">39,8%</td><td class="r">44,0%</td><td class="r">117 / 125 / 201</td></tr>
+<tr><td>8 o más (volumen)</td><td class="r">132,8</td><td class="r">85,6</td><td class="r">46,9</td><td class="r">24,4%</td><td class="r">29,2%</td><td class="r">36,9%</td><td class="r">51 / 41 / 29</td></tr>
+</table></div>
+<p class="note">Las operaciones de 8 o más neumáticos son las de menor margen y las que más cayeron: 51 pedidos en septiembre, 29 en noviembre. Los pedidos de 1 a 7 neumáticos son venta de mostrador típica (un juego de 4) y crecen.</p></div>
+
+</section>
+<section class="s" id="ventas">
+<div class="sh"><h2>Ventas y margen 1–20 por segmento</h2><p>Millones de pesos sin IVA. Margen con la misma fórmula del reporte.</p></div>
+
+
+<div class="grid g2">
+<div class="card"><h3>Ventas (M)</h3><div class="legend"><span><i style="background:var(--m1)"></i>1–20 Sep</span><span><i style="background:var(--m2)"></i>1–20 Oct</span><span><i style="background:var(--m3)"></i>1–20 Nov</span></div><div class="chartbox"><canvas id="c1" role="img" aria-label="Ventas 1 a 20 por segmento"></canvas></div></div>
+<div class="card"><h3>Margen %</h3><div class="legend"><span><i style="background:var(--m1)"></i>Sep</span><span><i style="background:var(--m2)"></i>Oct</span><span><i style="background:var(--m3)"></i>Nov</span></div><div class="chartbox"><canvas id="c2" role="img" aria-label="Margen porcentual por segmento"></canvas></div></div>
+</div>
+<div class="card" style="margin-top:14px"><div class="tw"><table>
+<tr><th>Segmento</th><th class="r">Ventas Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Nov vs Oct</th><th class="r">Nov vs Sep</th><th class="r">Margen Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Nov vs Oct</th></tr>
+<tr><td><b>Mostrador (consumidor final, sucursales)</b></td><td class='r'>40,8</td><td class='r'>36,7</td><td class='r'>55,1</td><td class='r'><span class="dl up">▲ +50%</span></td><td class='r'><span class="dl up">▲ +35%</span></td><td class='r'>52,5%</td><td class='r'>50,3%</td><td class='r'>53,9%</td><td class='r'><span class="dl up">▲ +3,6 pp</span></td></tr><tr><td><b>Consumidor final vía Seguros / MELI / Otros</b></td><td class='r'>2,3</td><td class='r'>8,5</td><td class='r'>24,4</td><td class='r'><span class="dl up">▲ +187%</span></td><td class='r'><span class="dl up">▲ +961%</span></td><td class='r'>49,7%</td><td class='r'>49,0%</td><td class='r'>48,2%</td><td class='r'><span class="dl eq">■ -0,8 pp</span></td></tr><tr><td><b>Empresas sin etiqueta de reventa</b></td><td class='r'>87,5</td><td class='r'>79,5</td><td class='r'>75,7</td><td class='r'><span class="dl dn">▼ -5%</span></td><td class='r'><span class="dl dn">▼ -13%</span></td><td class='r'>40,4%</td><td class='r'>36,6%</td><td class='r'>39,1%</td><td class='r'><span class="dl up">▲ +2,5 pp</span></td></tr><tr><td><b>Mayorista / Reventa (etiqueta "Cliente Reventa")</b></td><td class='r'>136,8</td><td class='r'>96,7</td><td class='r'>64,7</td><td class='r'><span class="dl dn">▼ -33%</span></td><td class='r'><span class="dl dn">▼ -53%</span></td><td class='r'>25,8%</td><td class='r'>33,8%</td><td class='r'>37,4%</td><td class='r'><span class="dl up">▲ +3,6 pp</span></td></tr><tr class='tot'><td>TOTAL</td><td class='r'>267,4</td><td class='r'>221,5</td><td class='r'>219,9</td><td class='r'><span class="dl eq">■ -1%</span></td><td class='r'><span class="dl dn">▼ -18%</span></td><td class='r'>34,8%</td><td class='r'>38,2%</td><td class='r'>43,3%</td><td class='r'><span class="dl up">▲ +5,2 pp</span></td></tr>
+</table></div></div>
+<div class="grid g2" style="margin-top:14px">
+<div class="card good-b"><h3>✓ Lo que ya se ve</h3><ul>
+<li><b>Mostrador:</b> 55,1 M contra 36,7 M en octubre y 40,8 M en septiembre. Pedidos: 144 → 122 → 197. Clientes distintos: 114 → 104 → 162. Ticket estable, cerca de 280 mil.</li>
+<li><b>Margen de Mostrador:</b> se mantiene alto, 52,5% → 50,3% → 53,9%.</li>
+<li><b>Seguros / MELI / Otros</b> (consumidor final): 2,3 → 8,5 → 24,4 M.</li>
+<li><b>Margen total:</b> 34,8% → 38,2% → 43,3%, y 95,2 M en pesos contra 84,5 M en octubre y 93,1 M en septiembre.</li></ul></div>
+<div class="card bad-b"><h3>△ Lo que pesa en contra</h3><ul>
+<li><b>Mayorista / Reventa cae</b> de 136,8 a 64,7 M, y pasa de 51% a 29% de las ventas. Es lo que hace que el total 1–20 baje de 267,4 a 219,9 M aunque Mostrador crezca.</li>
+<li><b>Empresas sin etiqueta</b> también bajan, de 87,5 a 75,7 M.</li>
+<li>Parte de la mejora del margen total es mix: se vende menos al segmento de menor margen (reventa, 25,8% → 37,4%).</li></ul></div>
+</div>
+
+</section>
+<section class="s alt" id="mostrador">
+<div class="sh"><h2>Mostrador antes y después del Chatroom</h2><p>Solo consumidor final de sucursales (sin Seguros / MELI / Otros). El Chatroom se implementó a mediados de octubre y en noviembre está activo al 100%.</p></div>
+
+
+<div class="grid g2">
+<div class="card"><h3>Pedidos por día con actividad</h3><div class="chartbox"><canvas id="c3" role="img" aria-label="Pedidos por día en Mostrador"></canvas></div></div>
+<div class="card"><h3>Detalle por período</h3><div class="tw"><table>
+<tr><th>Período</th><th class="r">Ventas M</th><th class="r">Pedidos</th><th class="r">Clientes</th><th class="r">Días</th><th class="r">Ped./día</th><th class="r">Ticket</th></tr>
+<tr><td>1–20 sep</td><td class="r">40,8</td><td class="r">144</td><td class="r">114</td><td class="r">17</td><td class="r">8,5</td><td class="r">283 mil</td></tr>
+<tr><td>1–15 oct (previo)</td><td class="r">30,1</td><td class="r">88</td><td class="r">75</td><td class="r">12</td><td class="r">7,3</td><td class="r">342 mil</td></tr>
+<tr><td>16–31 oct (implementación)</td><td class="r">33,0</td><td class="r">118</td><td class="r">94</td><td class="r">14</td><td class="r">8,4</td><td class="r">279 mil</td></tr>
+<tr class="tot"><td>1–20 nov (100% activo)</td><td class="r">55,1</td><td class="r">197</td><td class="r">162</td><td class="r">17</td><td class="r">11,6</td><td class="r">280 mil</td></tr>
+</table></div>
+<p class="note">Pedidos por día: +59% frente al período previo al Chatroom y +38% frente a la implementación. Días con actividad = días con al menos un pedido. Noviembre incluye el feriado del 9/11.</p></div>
+</div>
+
+</section>
+<section class="s" id="vendedores">
+<div class="sh"><h2>Desarrollo por vendedor</h2><p>Ventas 1–20 sin IVA en millones, margen con la fórmula del reporte, y a la derecha el origen de las ventas de noviembre por tipo de cliente (CF = consumidor final, EMP = empresas sin etiqueta, MAY = reventa).</p></div>
+
+
+<div class="card"><div class="tw"><table>
+<tr><th>Vendedor</th><th class="r">Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Nov vs Oct</th><th class="r">Margen Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Nov vs Oct</th><th class="r">Margen Nov $M</th><th class="r">Nov CF</th><th class="r">Nov EMP</th><th class="r">Nov MAY</th></tr>
+<tr><td><b>Luciano Spagnuolo</b></td><td class='r'>35,4</td><td class='r'>36,8</td><td class='r'>32,4</td><td class='r'><span class="dl dn">▼ -12%</span></td><td class='r'>45,9%</td><td class='r'>40,1%</td><td class='r'>40,8%</td><td class='r'><span class="dl eq">■ +0,7 pp</span></td><td class='r'>13,2</td><td class='r'>12,2</td><td class='r'>20,2</td><td class='r'>0,0</td></tr><tr><td><b>Vendedor de Sucursal 1</b></td><td class='r'>20,0</td><td class='r'>26,5</td><td class='r'>25,5</td><td class='r'><span class="dl dn">▼ -4%</span></td><td class='r'>48,8%</td><td class='r'>40,9%</td><td class='r'>51,9%</td><td class='r'><span class="dl up">▲ +11,1 pp</span></td><td class='r'>13,2</td><td class='r'>7,0</td><td class='r'>18,5</td><td class='r'>0,0</td></tr><tr><td><b>Gonzalo Gatica</b></td><td class='r'>20,4</td><td class='r'>15,5</td><td class='r'>17,8</td><td class='r'><span class="dl up">▲ +15%</span></td><td class='r'>47,9%</td><td class='r'>50,3%</td><td class='r'>54,5%</td><td class='r'><span class="dl up">▲ +4,2 pp</span></td><td class='r'>9,7</td><td class='r'>14,9</td><td class='r'>1,6</td><td class='r'>1,4</td></tr><tr><td><b>Vendedor Sucursal 2</b></td><td class='r'>10,5</td><td class='r'>8,5</td><td class='r'>7,9</td><td class='r'><span class="dl dn">▼ -7%</span></td><td class='r'>52,2%</td><td class='r'>52,7%</td><td class='r'>50,0%</td><td class='r'><span class="dl dn">▼ -2,7 pp</span></td><td class='r'>4,0</td><td class='r'>6,7</td><td class='r'>1,2</td><td class='r'>0,0</td></tr><tr><td><b>Tomás Palomino</b></td><td class='r'>22,9</td><td class='r'>26,0</td><td class='r'>24,2</td><td class='r'><span class="dl dn">▼ -7%</span></td><td class='r'>43,4%</td><td class='r'>43,7%</td><td class='r'>43,4%</td><td class='r'><span class="dl eq">■ -0,3 pp</span></td><td class='r'>10,5</td><td class='r'>6,2</td><td class='r'>2,9</td><td class='r'>15,1</td></tr><tr><td><b>Rodrigo Aime</b></td><td class='r'>6,9</td><td class='r'>3,4</td><td class='r'>8,0</td><td class='r'><span class="dl up">▲ +135%</span></td><td class='r'>40,7%</td><td class='r'>20,6%</td><td class='r'>40,0%</td><td class='r'><span class="dl up">▲ +19,4 pp</span></td><td class='r'>3,2</td><td class='r'>1,7</td><td class='r'>3,3</td><td class='r'>3,0</td></tr><tr><td><b>Lautaro Cadelago</b></td><td class='r'>5,6</td><td class='r'>13,2</td><td class='r'>32,5</td><td class='r'><span class="dl up">▲ +146%</span></td><td class='r'>43,4%</td><td class='r'>46,7%</td><td class='r'>47,9%</td><td class='r'><span class="dl up">▲ +1,1 pp</span></td><td class='r'>15,6</td><td class='r'>24,4</td><td class='r'>6,9</td><td class='r'>1,2</td></tr><tr><td><b>Mariano Fernández</b></td><td class='r'>105,2</td><td class='r'>55,0</td><td class='r'>34,1</td><td class='r'><span class="dl dn">▼ -38%</span></td><td class='r'>23,0%</td><td class='r'>29,8%</td><td class='r'>36,7%</td><td class='r'><span class="dl up">▲ +6,8 pp</span></td><td class='r'>12,5</td><td class='r'>0,0</td><td class='r'>9,5</td><td class='r'>24,6</td></tr><tr><td><b>Rodrigo Cozzolino</b></td><td class='r'>0,0</td><td class='r'>1,3</td><td class='r'>7,5</td><td class='r'><span class="dl up">▲ +477%</span></td><td class='r'>n/d</td><td class='r'>53,8%</td><td class='r'>52,4%</td><td class='r'><span class="dl dn">▼ -1,4 pp</span></td><td class='r'>3,9</td><td class='r'>5,6</td><td class='r'>0,9</td><td class='r'>1,0</td></tr><tr><td><b>Jorge Orozco</b></td><td class='r'>40,6</td><td class='r'>35,3</td><td class='r'>30,0</td><td class='r'><span class="dl dn">▼ -15%</span></td><td class='r'>30,6%</td><td class='r'>32,0%</td><td class='r'>31,5%</td><td class='r'><span class="dl eq">■ -0,5 pp</span></td><td class='r'>9,4</td><td class='r'>0,9</td><td class='r'>10,6</td><td class='r'>18,4</td></tr><tr class='tot'><td>TOTAL</td><td class='r'>267,5</td><td class='r'>221,5</td><td class='r'>219,9</td><td class='r'><span class="dl eq">■ -1%</span></td><td class='r'>34,8%</td><td class='r'>38,2%</td><td class='r'>43,3%</td><td class='r'><span class="dl up">▲ +5,2 pp</span></td><td class='r'>95,2</td><td class='r'>79,6</td><td class='r'>75,6</td><td class='r'>64,7</td></tr>
+</table></div>
+<p class="note">"Vendedor de Sucursal 1" y "Vendedor Sucursal 2" son usuarios compartidos. Luciano y la Sucursal 1 venden sobre todo a empresas sin etiqueta; Gonzalo, la Sucursal 2 y Lautaro, a consumidor final; Mariano, Jorge y Tomás, a reventa.</p></div>
+
+</section>
+<section class="s alt" id="productos">
+<div class="sh"><h2>Medidas, servicios y marcas</h2><p>Primeros 20 días de cada mes, sin IVA, margen con la fórmula del reporte. Medida y marca salen del nombre del producto (Odoo no tiene campos para eso); unos 26 de los 187 neumáticos tienen un nombre atípico y quedan fuera del detalle por medida.</p></div>
+
+
+
+<div class="card"><h3>Por tipo de producto</h3><div class="tw"><table>
+<tr><th>Tipo</th><th class="r">Ventas Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Margen Sep</th><th class="r">Oct</th><th class="r">Nov</th><th class="r">Unidades Sep / Oct / Nov</th></tr>
+<tr><td><b>Neumáticos</b></td><td class="r">249,2</td><td class="r">208,9</td><td class="r">203,0</td><td class="r">31,2%</td><td class="r">35,4%</td><td class="r">41,2%</td><td class="r">2.322 / 1.632 / 1.572</td></tr>
+<tr><td><b>Servicios</b></td><td class="r">13,1</td><td class="r">10,4</td><td class="r">12,4</td><td class="r">94,7%</td><td class="r">91,4%</td><td class="r">98,9%</td><td class="r">319 / 261 / 313</td></tr>
+<tr><td><b>Repuestos y accesorios</b></td><td class="r">4,0</td><td class="r">2,2</td><td class="r">4,4</td><td class="r">45,9%</td><td class="r">45,4%</td><td class="r">-14,9%</td><td class="r">62 / 49 / 67</td></tr>
+</table></div>
+<p class="note">Otros productos: 1,1 M en septiembre. Precio promedio por neumático: 107 mil en septiembre, 128 mil en octubre y 129 mil en noviembre.</p></div>
+
+<div class="grid g2" style="margin-top:14px">
+<div class="card"><h3>Marcas (neumáticos)</h3><div class="tw"><table>
+<tr><th>Marca</th><th class="r">Ventas M Sep / Oct / Nov</th><th class="r">Unidades</th><th class="r">Margen %</th></tr>
+<tr><td><b>Sunfull</b></td><td class="r">188,4 / 136,4 / 146,8</td><td class="r">1.944 / 1.337 / 1.254</td><td class="r">32 / 39 / 45</td></tr>
+<tr><td>Bridgestone</td><td class="r">14,6 / 18,9 / 6,4</td><td class="r">45 / 41 / 27</td><td class="r">31 / 31 / 36</td></tr>
+<tr><td>Triangle</td><td class="r">3,5 / 18,1 / 15,4</td><td class="r">12 / 54 / 36</td><td class="r">38 / 19 / 22</td></tr>
+<tr><td>Sailun</td><td class="r">8,1 / 8,8 / 5,4</td><td class="r">96 / 66 / 43</td><td class="r">28 / 31 / 29</td></tr>
+<tr><td>Firestone</td><td class="r">4,5 / 6,7 / 4,0</td><td class="r">29 / 20 / 18</td><td class="r">25 / 34 / 44</td></tr>
+<tr><td>Zetum</td><td class="r">7,7 / 4,1 / 2,4</td><td class="r">20 / 10 / 6</td><td class="r">20 / 23 / 19</td></tr>
+<tr><td>Firemax</td><td class="r">8,2 / 1,9 / 0,8</td><td class="r">97 / 22 / 8</td><td class="r">30 / 38 / 38</td></tr>
+<tr><td>Atrezzo</td><td class="r">0,9 / 0,8 / 6,1</td><td class="r">12 / 10 / 84</td><td class="r">36 / 38 / 28</td></tr>
+<tr><td>Mirage</td><td class="r">0,7 / 1,7 / 3,9</td><td class="r">4 / 10 / 26</td><td class="r">33 / 41 / 39</td></tr>
+<tr><td>Otras / sin marca en el nombre</td><td class="r">0,9 / 4,6 / 8,7</td><td class="r">4 / 23 / 46</td><td class="r">44 / 31 / 39</td></tr>
+</table></div></div>
+<div class="card"><h3>Marca por tipo de cliente (1–20 nov)</h3><div class="tw"><table>
+<tr><th>Marca</th><th class="r">Consumidor final</th><th class="r">Empresas</th><th class="r">Reventa</th></tr>
+<tr><td><b>Sunfull</b></td><td class="r">57,0 M · 49%</td><td class="r">39,8 M · 44%</td><td class="r">49,9 M · 41%</td></tr>
+<tr><td>Bridgestone</td><td class="r">4,2 M · 41%</td><td class="r">2,2 M · 26%</td><td class="r">-</td></tr>
+<tr><td>Triangle</td><td class="r">-</td><td class="r">12,0 M · 23%</td><td class="r">3,4 M · 20%</td></tr>
+<tr><td>Sailun</td><td class="r">0,3 M · 50%</td><td class="r">2,9 M · 35%</td><td class="r">2,2 M · 18%</td></tr>
+<tr><td>Firestone</td><td class="r">2,1 M · 46%</td><td class="r">1,9 M · 42%</td><td class="r">-</td></tr>
+<tr><td>Otras marcas</td><td class="r">7,6 M · 41%</td><td class="r">8,3 M · 33%</td><td class="r">9,2 M · 31%</td></tr>
+</table></div><p class="note">Ventas en millones y margen %. Sunfull es el 72% de las ventas de neumáticos de noviembre (76% en septiembre).</p></div>
+</div>
+
+<div class="grid g2" style="margin-top:14px">
+<div class="card"><h3>Medidas más vendidas (unidades)</h3><div class="tw"><table>
+<tr><th>Medida</th><th class="r">Unidades Sep / Oct / Nov</th><th class="r">Ventas M</th><th class="r">Margen %</th></tr>
+<tr><td>175/65 R14</td><td class="r">300 / 150 / 209</td><td class="r">15,7 / 9,7 / 13,6</td><td class="r">26 / 42 / 43</td></tr>
+<tr><td>175/70 R13</td><td class="r">256 / 175 / 38</td><td class="r">13,9 / 9,7 / 2,4</td><td class="r">35 / 36 / 39</td></tr>
+<tr><td>255/70 R16</td><td class="r">54 / 48 / 155</td><td class="r">6,5 / 8,5 / 26,8</td><td class="r">25 / 47 / 47</td></tr>
+<tr><td>185/65 R14</td><td class="r">71 / 54 / 114</td><td class="r">5,1 / 4,1 / 7,8</td><td class="r">37 / 40 / 43</td></tr>
+<tr><td>185/60 R15</td><td class="r">120 / 94 / 69</td><td class="r">7,1 / 7,0 / 5,1</td><td class="r">26 / 42 / 45</td></tr>
+<tr><td>185/65 R15</td><td class="r">110 / 90 / 84</td><td class="r">6,6 / 6,8 / 6,8</td><td class="r">28 / 44 / 47</td></tr>
+<tr><td>175/70 R14</td><td class="r">101 / 122 / 96</td><td class="r">5,5 / 8,2 / 6,9</td><td class="r">25 / 41 / 30</td></tr>
+<tr><td>205/55 R16</td><td class="r">95 / 69 / 55</td><td class="r">9,6 / 6,7 / 6,4</td><td class="r">40 / 36 / 48</td></tr>
+<tr><td>165/70 R13</td><td class="r">35 / 69 / 85</td><td class="r">1,9 / 3,8 / 5,0</td><td class="r">30 / 39 / 47</td></tr>
+<tr><td>265/70 R16</td><td class="r">72 / 46 / 61</td><td class="r">10,0 / 8,1 / 11,1</td><td class="r">29 / 45 / 47</td></tr>
+<tr class="tot"><td>295/80 R22,5 (camión)</td><td class="r">86 / 95 / 81</td><td class="r">35,9 / 38,6 / 34,1</td><td class="r">34 / 25 / 29</td></tr>
+</table></div><p class="note">La 295/80 R22,5 es la de mayor facturación del negocio, con poco margen.</p></div>
+<div class="card"><h3>Por rodado (aro)</h3><div class="tw"><table>
+<tr><th>Aro</th><th class="r">Unidades Sep / Oct / Nov</th><th class="r">Ventas M</th><th class="r">Margen %</th></tr>
+<tr><td>R16</td><td class="r">495 / 306 / 422</td><td class="r">52,8 / 40,1 / 63,7</td><td class="r">30 / 40 / 46</td></tr>
+<tr><td>R22,5</td><td class="r">126 / 132 / 97</td><td class="r">51,0 / 59,0 / 40,5</td><td class="r">31 / 25 / 29</td></tr>
+<tr><td>R15</td><td class="r">535 / 374 / 292</td><td class="r">43,3 / 31,6 / 26,7</td><td class="r">31 / 41 / 46</td></tr>
+<tr><td>R14</td><td class="r">556 / 388 / 476</td><td class="r">32,1 / 26,6 / 32,4</td><td class="r">30 / 41 / 40</td></tr>
+<tr><td>R17</td><td class="r">189 / 119 / 115</td><td class="r">26,7 / 21,5 / 20,9</td><td class="r">31 / 42 / 42</td></tr>
+<tr><td>R13</td><td class="r">291 / 244 / 123</td><td class="r">15,8 / 13,5 / 7,5</td><td class="r">35 / 37 / 44</td></tr>
+<tr><td>R18</td><td class="r">23 / 34 / 19</td><td class="r">5,7 / 7,4 / 4,0</td><td class="r">41 / 35 / 44</td></tr>
+<tr><td>R17,5</td><td class="r">22 / 16 / 15</td><td class="r">6,2 / 3,1 / 3,9</td><td class="r">36 / 11 / 51</td></tr>
+</table></div></div>
+</div>
+
+<div class="card" style="margin-top:14px"><h3>Servicios</h3><div class="tw"><table>
+<tr><th>Servicio</th><th class="r">Unidades Sep / Oct / Nov</th><th class="r">Ventas M Sep / Oct / Nov</th></tr>
+<tr><td>Servicio completo PCR</td><td class="r">91 / 62 / 92</td><td class="r">3,69 / 2,34 / 4,07</td></tr>
+<tr><td>Servicio completo LTR</td><td class="r">54 / 35 / 46</td><td class="r">2,54 / 1,87 / 2,44</td></tr>
+<tr><td>Tren delantero</td><td class="r">27 / 13 / 22</td><td class="r">2,39 / 1,41 / 1,99</td></tr>
+<tr><td>Servicio completo TBR</td><td class="r">13 / 12 / 13</td><td class="r">1,35 / 1,13 / 1,17</td></tr>
+<tr><td>Balanceo PCR</td><td class="r">53 / 46 / 35</td><td class="r">0,53 / 0,52 / 0,53</td></tr>
+<tr><td>Alineación (PCR + TBR)</td><td class="r">11 / 7 / 11</td><td class="r">0,31 / 0,24 / 0,51</td></tr>
+<tr><td>Balanceo (LTR + TBR)</td><td class="r">10 / 16 / 22</td><td class="r">0,29 / 0,28 / 0,56</td></tr>
+</table></div>
+<p class="note">Los servicios no tienen costo cargado, por eso el reporte les asigna margen de 91% a 99%. En pesos son el 5% de las ventas.</p></div>
+
+<div class="grid g2" style="margin-top:14px">
+<div class="card good-b"><h3>Qué se ve</h3><ul>
+<li><b>Menos neumáticos, más caros:</b> las unidades bajan 32% desde septiembre (2.322 → 1.572) y el precio promedio por neumático sube de 107 a 129 mil. Parte del aumento es mix (menos reventa) y parte puede ser precio.</li>
+<li><b>Sunfull sostiene el negocio:</b> es el 72% de las ventas de neumáticos y su margen pasa de 32% a 45%. La mejora general de rentabilidad depende de esta marca.</li>
+<li><b>255/70 R16:</b> pasó de 54 a 155 unidades, con 47% de margen, repartidas entre muchos clientes individuales.</li>
+<li><b>Servicios:</b> se recuperan en noviembre (12,4 M), con servicio completo PCR en 92 unidades.</li>
+</ul></div>
+<div class="card bad-b"><h3>Qué mirar</h3><ul>
+<li><b>Triangle:</b> 18,1 M en octubre y 15,4 M en noviembre con 19% a 22% de margen, vendido sobre todo a empresas y reventa.</li>
+<li><b>Camión R22,5:</b> es el mayor rubro por facturación pero con 25% a 31% de margen, y las ventas bajan de 59,0 a 40,5 M.</li>
+<li><b>175/70 R13:</b> cayó de 256 a 38 unidades; conviene revisar si es falta de stock o falta de demanda.</li>
+<li><b>Costo mal cargado:</b> la cámara CAM-0076 (G13 13C 360) tiene costo de 1.088.429 y se vendió a unos 19.800 la unidad. Resta 2,1 M al margen de noviembre: sin ese error el margen de 1–20 de noviembre sería de 44,3% y no 43,3%.</li>
+</ul></div>
+</div>
+
+</section>
+<section class="s" id="proyeccion">
+<div class="sh"><h2>Total mensual y proyección de noviembre</h2></div>
+
+<div class="grid g2">
+<div class="card"><h3>Ventas por mes (M, sin IVA)</h3><div class="legend"><span><i style="background:var(--m3)"></i>Vendido</span><span><i style="background:#9ec5f4"></i>Proyección base</span></div><div class="chartbox"><canvas id="c4" role="img" aria-label="Total mensual y proyección"></canvas></div></div>
+<div class="card"><h3>Escenarios de noviembre</h3><div class="scroll"><div class="tw"><table>
+<tr><th>Escenario</th><th class="r">Ritmo día hábil</th><th class="r">Ventas</th><th class="r">Margen est.</th></tr>
+<tr><td>Conservador</td><td class="r">10,7 M (última semana)</td><td class="r">290 M</td><td class="r">126 M</td></tr>
+<tr><td><b>Base</b></td><td class="r">12,3 M (10–20 nov)</td><td class="r"><b>298 M</b></td><td class="r"><b>129 M</b></td></tr>
+<tr><td>Optimista</td><td class="r">14,5 M (promedio nov)</td><td class="r">309 M</td><td class="r">134 M</td></tr>
+</table></div></div>
+<p class="note">Vendido a hoy: 223,7 M. Quedan 5 días hábiles (24 al 27 y 30/11), los sábados 21 y 28 y el feriado del lunes 23 (se estima al nivel del 9/11, 6,9 M). El margen estimado aplica el 43,4% de lo que va del mes. Para comparar: septiembre cerró con 423,3 M de ventas y 156,8 M de margen, octubre con 428,0 M y 165,3 M. No incluye un cierre extraordinario de cuentas grandes como el del 27 y 30 de octubre (≈100 M en dos días).</p></div>
+</div>
+
+</section>
+<section class="s alt" id="clientes">
+<div class="sh"><h2>Clientes sin etiqueta con perfil de compra mayorista</h2></div>
+
+<div class="card"><div class="tw"><table>
+<tr><th>Cliente</th><th class="r">Ventas Sep–Nov (M)</th><th class="r">Pedidos</th><th class="r">Neumáticos</th></tr>
+<tr><td>Jorma S.A.</td><td class="r">40,9</td><td class="r">3</td><td class="r">112</td></tr>
+<tr><td>Serving S.R.L.</td><td class="r">13,3</td><td class="r">1</td><td class="r">32</td></tr>
+<tr><td>Panamericana Srl</td><td class="r">10,7</td><td class="r">9</td><td class="r">27</td></tr>
+<tr><td>Transporte Micaela S.A.</td><td class="r">10,3</td><td class="r">2</td><td class="r">26</td></tr>
+<tr><td>Líquidos del Sur S.A.</td><td class="r">7,6</td><td class="r">3</td><td class="r">30</td></tr>
+<tr><td>Paris Autos S.A.</td><td class="r">6,2</td><td class="r">25</td><td class="r">67</td></tr>
+</table></div>
+<p class="note">Son los de mayor facturación entre las empresas sin la etiqueta de reventa. Es una lista para revisar con el equipo comercial: no se modificó nada en Odoo.</p></div>
+
+</section>
+<section class="s" id="cierre">
+<div class="sh"><h2>Cierre: qué dice la comparación con el mes completo</h2><p>Septiembre cerró en 423 millones y octubre en 428; noviembre va 224 millones al 21/11. Qué se puede y qué no se puede concluir de esa diferencia.</p></div>
+
+
+<div class="grid g2">
+<div class="card info-b"><h3>1. El mes todavía no cerró, y octubre se definió en la segunda mitad</h3><ul>
+<li><b>Septiembre:</b> los primeros 20 días fueron el 63% del mes (267 de 423 millones).</li>
+<li><b>Octubre:</b> los primeros 20 días fueron solo el 52% (221 de 428 millones). Los últimos 11 días aportaron 206 millones.</li>
+<li><b>Noviembre:</b> va 220 millones en los primeros 20 días, casi igual que octubre a esta altura. La proyección de 298 millones solo sostiene el ritmo actual. Si noviembre repitiera el patrón de octubre, llegaría a unos 420 millones.</li></ul></div>
+<div class="card info-b"><h3>2. El volumen del mes lo da el cliente empresa y reventa, no el mostrador</h3><ul>
+<li><b>Peso en el total:</b> esos dos segmentos fueron el 83% de las ventas de septiembre y el 82% de octubre. El mostrador fue el 17% (70 y 76 millones).</li>
+<li><b>Ritmo diario de empresas y reventa:</b> baja de 13,2 millones por día en septiembre a 8,3 en noviembre, un 37% menos. Es lo que explica la brecha.</li>
+<li><b>Mostrador:</b> en noviembre ya lleva 82 millones, más que todo octubre (76 millones) y todo septiembre (70), con 9 días por delante. Va a cerrar sobre 100 millones, según nuestra estimación.</li>
+<li><b>Consecuencia:</b> la estrategia de Marketing apunta al 17% del negocio y funciona. No alcanza para compensar una caída en el 80% restante.</li></ul></div>
+<div class="card info-b"><h3>3. Ese 80% depende de pocas operaciones grandes</h3><ul>
+<li><b>Pedidos de 5 millones o más:</b> hubo 8 en septiembre (18% de las ventas) y 8 en octubre (25%). En noviembre hay 2 (5%).</li>
+<li><b>Concentración:</b> los 10 mayores clientes fueron el 39% y el 37% de las ventas de septiembre y octubre, y llevan 25% en noviembre.</li>
+<li><b>Brecha a cubrir:</b> para igualar a octubre, noviembre necesita unos 125 a 130 millones por encima del ritmo actual en la última semana. Eso requiere que vuelvan los pedidos grandes.</li></ul></div>
+<div class="card bad-b"><h3>4. Lo que no se puede afirmar con estos datos</h3><ul>
+<li>No sabemos si cayó la demanda de empresas y reventa o si es solo cuándo compran.</li>
+<li>Noviembre tiene además 2 feriados (el 9 y el 23), unos 2 días hábiles menos que octubre, y eso no explica un 30%.</li></ul>
+<h3 style="margin-top:10px">Dónde mirar esta semana</h3><ul>
+<li><b>Cotizaciones abiertas:</b> hay 283 de noviembre por 198 millones, y 188 millones son de empresas (268 cotizaciones).</li>
+<li><b>Seguimiento:</b> seguir esas cotizaciones antes del cierre es lo que más puede mover el resultado.</li></ul></div>
+</div>
+
+</section>
+<footer>
+  <div><b>Lógica</b> · Optimización de procesos comerciales y operativos</div>
+  <div><a href="https://somoslogica.com.ar">somoslogica.com.ar</a> · San Luis, Argentina</div>
+</footer>
+</main>
+<button class="totop" id="totop" aria-label="Volver arriba">↑</button>
+<script>
+
+const cs=getComputedStyle(document.documentElement);const V=n=>cs.getPropertyValue(n).trim();const C={m1:V('--gray')||'#C4C4C4',m2:'#66BBD3',m3:V('--teal')||'#0094BA',ink:V('--muted')||'#62666C',grid:V('--line')||'#E2E2E1',txt:V('--ink')||'#2A2A2E'};
+Chart.defaults.font.family='Poppins,system-ui,sans-serif';Chart.defaults.color=C.ink;
+const fmt=v=>v.toLocaleString('es-AR',{maximumFractionDigits:1});
+const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.parsed.y)}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:C.grid}}}};
+const lab={id:'lab',afterDatasetsDraw(ch){const x=ch.ctx;x.save();x.fillStyle=C.txt;x.font='600 11px Poppins';x.textAlign='center';ch.data.datasets.forEach((d,i)=>{ch.getDatasetMeta(i).data.forEach((b,j)=>{if(d.noLabel)return;x.fillText(fmt(d.data[j]),b.x,b.y-4)})});x.restore()}};
+const L=['Mostrador','Cons. final Seguros/MELI','Empresas sin etiqueta','Mayorista / Reventa'];
+new Chart(c1,{type:'bar',plugins:[lab],data:{labels:L,datasets:[
+{label:'1–20 Sep',data:[40.8,2.3,87.5,136.8],backgroundColor:C.m1,borderRadius:3},
+{label:'1–20 Oct',data:[36.7,8.5,79.5,96.7],backgroundColor:C.m2,borderRadius:3},
+{label:'1–20 Nov',data:[55.1,24.4,75.7,64.7],backgroundColor:C.m3,borderRadius:3}]},options:base});
+new Chart(c2,{type:'bar',plugins:[lab],data:{labels:[...L,'Total'],datasets:[
+{label:'Sep',data:[52.5,49.7,40.4,25.8,34.8],backgroundColor:C.m1,borderRadius:3},
+{label:'Oct',data:[50.3,49.0,36.6,33.8,38.2],backgroundColor:C.m2,borderRadius:3},
+{label:'Nov',data:[53.9,48.2,39.1,37.4,43.3],backgroundColor:C.m3,borderRadius:3}]},options:{...base,plugins:{...base.plugins,tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.parsed.y)+'%'}}}}});
+new Chart(c3,{type:'bar',plugins:[lab],data:{labels:['1–20 Sep','1–15 Oct (previo)','16–31 Oct (implem.)','1–20 Nov (100%)'],datasets:[{label:'Pedidos por día',data:[8.5,7.3,8.4,11.6],backgroundColor:[C.m1,C.m2,C.m2,C.m3],borderRadius:3}]},options:base});
+new Chart(c4,{type:'bar',plugins:[lab],data:{labels:['Septiembre','Octubre','Noviembre'],datasets:[
+{label:'Vendido',data:[423.3,428.0,223.7],backgroundColor:C.m3,borderRadius:3,stack:'a'},
+{label:'Proyección base',data:[0,0,74.6],backgroundColor:'#9FD6E6',borderRadius:3,stack:'a',noLabel:true}]},
+options:{...base,scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,beginAtZero:true,grid:{color:C.grid}}}}});
+
+(function(){
+  var links=document.querySelectorAll('#nav a'),map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var ids=Object.keys(map);
+  function spy(){var y=window.scrollY+120,cur=ids[0];ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.offsetTop<=y)cur=id});
+    links.forEach(function(a){a.classList.toggle('on',a===map[cur])});
+    document.getElementById('nav').scrollTo({left:map[cur].offsetLeft-20,behavior:'auto'});
+    document.getElementById('totop').classList.toggle('show',window.scrollY>600)}
+  window.addEventListener('scroll',spy,{passive:true});spy();
+  document.getElementById('totop').addEventListener('click',function(){window.scrollTo({top:0})});
+})();
+</script>
+</body>
+</html>
